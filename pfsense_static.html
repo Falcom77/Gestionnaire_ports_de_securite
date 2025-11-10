@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Ports pfSense</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .category {
+            margin: 30px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .gaming { background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); }
+        .vpn { background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); }
+        .monitoring { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .database { background: linear-gradient(135deg, #f97316 0%, #f59e0b 100%); }
+        .infrastructure { background: linear-gradient(135deg, #ef4444 0%, #f43f5e 100%); }
+        .administration { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); }
+        .network { background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%); }
+        .home { background: linear-gradient(135deg, #eab308 0%, #f97316 100%); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        thead {
+            background: #f3f4f6;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .inactive {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .protocol {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .tcp {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .udp {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .both {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        code {
+            background: #f3f4f6;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .port-internal {
+            color: #3b82f6;
+        }
+
+        .port-external {
+            color: #a855f7;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 10px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Gestionnaire de Ports pfSense</h1>
+            <p>Configuration complète des règles de pare-feu</p>
+        </header>
+
+        <!-- Gaming -->
+        <div class="category">
+            <div class="category-header gaming">
+                🎮 Gaming
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>État</th>
+                        <th>Service</th>
+                        <th>Port Interne</th>
+                        <th>Port Externe</th>
+                        <th>Protocole</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Steam - Client</td>
+                        <td><code class="port-internal">27015-27030</code></td>
+                        <td><code class="port-external">52100-52115</code></td>
+                        <td><span class="protocol both">TCP/UDP</span></td>
+                        <td>Steam gaming ports</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Steam - Client</td>
+                        <td><code class="port-internal">27036-27037</code></td>
+                        <td><code class="port-external">52116-52117</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Steam client</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Steam - Client</td>
+                        <td><code class="port-internal">4380</code></td>
+                        <td><code class="port-external">52118</code></td>
+                        <td><span class="protocol udp">UDP</span></td>
+                        <td>Steam client</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status inactive">INACTIF</span></td>
+                        <td>Satisfactory Server</td>
+                        <td><code class="port-internal">7777</code></td>
+                        <td><code class="port-external">48201</code></td>
+                        <td><span class="protocol udp">UDP</span></td>
+                        <td>Game port principal</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status inactive">INACTIF</span></td>
+                        <td>SCUM - Game</td>
+                        <td><code class="port-internal">7777</code></td>
+                        <td><code class="port-external">47777</code></td>
+                        <td><span class="protocol udp">UDP</span></td>
+                        <td>SCUM game port principal</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- VPN -->
+        <div class="category">
+            <div class="category-header vpn">
+                🔐 VPN
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>État</th>
+                        <th>Service</th>
+                        <th>Port Interne</th>
+                        <th>Port Externe</th>
+                        <th>Protocole</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>OpenVPN</td>
+                        <td><code class="port-internal">1194</code></td>
+                        <td><code class="port-external">49100</code></td>
+                        <td><span class="protocol udp">UDP</span></td>
+                        <td>OpenVPN standard</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status inactive">INACTIF</span></td>
+                        <td>OCserv</td>
+                        <td><code class="port-internal">443</code></td>
+                        <td><code class="port-external">N/A</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>OpenVPN Connect (OCserv)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>WireGuard</td>
+                        <td><code class="port-internal">51820</code></td>
+                        <td><code class="port-external">49101</code></td>
+                        <td><span class="protocol udp">UDP</span></td>
+                        <td>WireGuard standard</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Monitoring -->
+        <div class="category">
+            <div class="category-header monitoring">
+                📈 Monitoring
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>État</th>
+                        <th>Service</th>
+                        <th>Port Interne</th>
+                        <th>Port Externe</th>
+                        <th>Protocole</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Grafana</td>
+                        <td><code class="port-internal">3000</code></td>
+                        <td><code class="port-external">33100</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Interface web Grafana</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Prometheus</td>
+                        <td><code class="port-internal">9090</code></td>
+                        <td><code class="port-external">39090</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Prometheus metrics & UI</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Loki</td>
+                        <td><code class="port-internal">3100</code></td>
+                        <td><code class="port-external">43100</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Loki logs ingestion</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Tempo</td>
+                        <td><code class="port-internal">3200</code></td>
+                        <td><code class="port-external">43200</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Tempo traces HTTP</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Mimir</td>
+                        <td><code class="port-internal">8080</code></td>
+                        <td><code class="port-external">38080</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Mimir metrics HTTP</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Database -->
+        <div class="category">
+            <div class="category-header database">
+                🗄️ Database
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>État</th>
+                        <th>Service</th>
+                        <th>Port Interne</th>
+                        <th>Port Externe</th>
+                        <th>Protocole</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>InfluxDB</td>
+                        <td><code class="port-internal">8086</code></td>
+                        <td><code class="port-external">33200</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>InfluxDB HTTP API</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>PostgreSQL</td>
+                        <td><code class="port-internal">5432</code></td>
+                        <td><code class="port-external">35432</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Base de données PostgreSQL</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status inactive">INACTIF</span></td>
+                        <td>MySQL</td>
+                        <td><code class="port-internal">3306</code></td>
+                        <td><code class="port-external">33060</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Base de données MySQL</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Infrastructure -->
+        <div class="category">
+            <div class="category-header infrastructure">
+                🏗️ Infrastructure
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>État</th>
+                        <th>Service</th>
+                        <th>Port Interne</th>
+                        <th>Port Externe</th>
+                        <th>Protocole</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Kubernetes - API</td>
+                        <td><code class="port-internal">6443</code></td>
+                        <td><code class="port-external">36443</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Kubernetes API Server</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>OpenTelemetry - gRPC</td>
+                        <td><code class="port-internal">4317</code></td>
+                        <td><code class="port-external">34317</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>OTLP gRPC receiver</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>OpenTelemetry - HTTP</td>
+                        <td><code class="port-internal">4318</code></td>
+                        <td><code class="port-external">34318</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>OTLP HTTP receiver</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Administration -->
+        <div class="category">
+            <div class="category-header administration">
+                ⚙️ Administration
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>État</th>
+                        <th>Service</th>
+                        <th>Port Interne</th>
+                        <th>Port Externe</th>
+                        <th>Protocole</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>SSH</td>
+                        <td><code class="port-internal">22</code></td>
+                        <td><code class="port-external">50022</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Secure Shell</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status inactive">INACTIF</span></td>
+                        <td>RDP</td>
+                        <td><code class="port-internal">3389</code></td>
+                        <td><code class="port-external">53389</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Remote Desktop Protocol</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Proxmox</td>
+                        <td><code class="port-internal">8006</code></td>
+                        <td><code class="port-external">58006</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Interface web Proxmox HTTPS</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>QNAP</td>
+                        <td><code class="port-internal">443</code></td>
+                        <td><code class="port-external">58443</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Interface web HTTPS</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Network -->
+        <div class="category">
+            <div class="category-header network">
+                🌐 Network
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>État</th>
+                        <th>Service</th>
+                        <th>Port Interne</th>
+                        <th>Port Externe</th>
+                        <th>Protocole</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Wake on LAN</td>
+                        <td><code class="port-internal">9</code></td>
+                        <td><code class="port-external">N/A</code></td>
+                        <td><span class="protocol udp">UDP</span></td>
+                        <td>WOL Magic Packet (broadcast)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Home Automation -->
+        <div class="category">
+            <div class="category-header home">
+                🏠 Home Automation
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>État</th>
+                        <th>Service</th>
+                        <th>Port Interne</th>
+                        <th>Port Externe</th>
+                        <th>Protocole</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status active">ACTIF</span></td>
+                        <td>Home Assistant</td>
+                        <td><code class="port-internal">8123</code></td>
+                        <td><code class="port-external">48123</code></td>
+                        <td><span class="protocol tcp">TCP</span></td>
+                        <td>Interface web Home Assistant</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

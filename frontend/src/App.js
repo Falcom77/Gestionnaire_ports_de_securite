@@ -589,23 +589,78 @@ function App() {
               <table className="w-full">
                 <thead className={darkMode ? 'bg-gray-900/50' : 'bg-gray-100'}>
                   <tr>
-                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '200px'}}>Hostname</th>
-                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '180px'}}>Adresse IP/Masque</th>
-                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '160px'}}>Adresse MAC</th>
-                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '150px'}}>Type</th>
-                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{minWidth: '200px'}}>Description</th>
+                    <th 
+                      className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-opacity-80 transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-200'}`} 
+                      style={{width: '200px'}}
+                      onClick={() => handleSort('hostname')}
+                    >
+                      <div className="flex items-center gap-2">
+                        Hostname
+                        {sortConfig.key === 'hostname' && (
+                          <span>{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                        )}
+                      </div>
+                    </th>
+                    <th 
+                      className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-opacity-80 transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-200'}`} 
+                      style={{width: '180px'}}
+                      onClick={() => handleSort('ip_address')}
+                    >
+                      <div className="flex items-center gap-2">
+                        Adresse IP/Masque
+                        {sortConfig.key === 'ip_address' && (
+                          <span>{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                        )}
+                      </div>
+                    </th>
+                    <th 
+                      className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-opacity-80 transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-200'}`} 
+                      style={{width: '160px'}}
+                      onClick={() => handleSort('mac_address')}
+                    >
+                      <div className="flex items-center gap-2">
+                        Adresse MAC
+                        {sortConfig.key === 'mac_address' && (
+                          <span>{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                        )}
+                      </div>
+                    </th>
+                    <th 
+                      className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-opacity-80 transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-200'}`} 
+                      style={{width: '150px'}}
+                      onClick={() => handleSort('device_type')}
+                    >
+                      <div className="flex items-center gap-2">
+                        Type
+                        {sortConfig.key === 'device_type' && (
+                          <span>{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                        )}
+                      </div>
+                    </th>
+                    <th 
+                      className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-opacity-80 transition-colors ${darkMode ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-200'}`} 
+                      style={{minWidth: '200px'}}
+                      onClick={() => handleSort('description')}
+                    >
+                      <div className="flex items-center gap-2">
+                        Description
+                        {sortConfig.key === 'description' && (
+                          <span>{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                        )}
+                      </div>
+                    </th>
                     <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '100px'}}>Actions</th>
                   </tr>
                 </thead>
                 <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
-                  {devices.length === 0 ? (
+                  {sortedDevices.length === 0 ? (
                     <tr>
                       <td colSpan="6" className={`px-4 py-8 text-center ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                         Aucun périphérique enregistré. Cliquez sur "Ajouter Périphérique" pour commencer.
                       </td>
                     </tr>
                   ) : (
-                    devices.map((device, idx) => (
+                    sortedDevices.map((device, idx) => (
                       <tr 
                         key={device.id} 
                         className={`transition-colors ${

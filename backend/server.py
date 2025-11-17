@@ -115,9 +115,9 @@ async def init_default_ports():
             {"service": "MySQL", "port_internal": "3306", "port_external": "33060", "protocol": "TCP", "description": "Base de données MySQL", "category": "Database", "is_active": False},
             
             # Infrastructure
-            {"service": "Kubernetes - API Server", "port_internal": "6443", "port_external": "36443", "protocol": "TCP", "description": "Kubernetes API", "category": "Infrastructure", "is_active": True},
-            {"service": "OpenTelemetry - gRPC", "port_internal": "4317", "port_external": "34317", "protocol": "TCP", "description": "OTLP gRPC receiver", "category": "Infrastructure", "is_active": True},
-            {"service": "OpenTelemetry - HTTP", "port_internal": "4318", "port_external": "34318", "protocol": "TCP", "description": "OTLP HTTP receiver", "category": "Infrastructure", "is_active": True},
+            {"service": "Kubernetes - API Server", "port_internal": "6443", "port_external": "36443", "protocol": "TCP", "description": "Kubernetes API", "category": "Infrastructure", "icon_url": "https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg", "is_active": True},
+            {"service": "OpenTelemetry - gRPC", "port_internal": "4317", "port_external": "34317", "protocol": "TCP", "description": "OTLP gRPC receiver", "category": "Infrastructure", "icon_url": "https://opentelemetry.io/img/logos/opentelemetry-horizontal-color.svg", "is_active": True},
+            {"service": "OpenTelemetry - HTTP", "port_internal": "4318", "port_external": "34318", "protocol": "TCP", "description": "OTLP HTTP receiver", "category": "Infrastructure", "icon_url": "https://opentelemetry.io/img/logos/opentelemetry-horizontal-color.svg", "is_active": True},
             
             # Administration
             {"service": "Contrôle à distance - SSH", "port_internal": "22", "port_external": "50022", "protocol": "TCP", "description": "Secure Shell", "category": "Administration", "is_active": True},

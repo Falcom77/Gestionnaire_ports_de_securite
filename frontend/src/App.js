@@ -468,23 +468,36 @@ function App() {
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Service/Application</label>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Service/Application <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     value={formData.service}
                     onChange={(e) => setFormData({...formData, service: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                    }`}
+                    placeholder="Ex: Grafana"
                     required
                     data-testid="input-service"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Catégorie</label>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Catégorie <span className="text-red-500">*</span>
+                  </label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({...formData, category: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white' 
+                        : 'bg-white border-gray-300 text-gray-900'
+                    }`}
                     data-testid="select-category"
                   >
                     {categories.map(cat => (

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Ports pfSense - Version Standalone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --bg-tertiary: #374151;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border-color: #374151;
+            --blue-500: #3b82f6;
+            --green-500: #10b981;
+            --red-500: #ef4444;
+            --purple-500: #a855f7;
+            --orange-500: #f97316;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        body.light-mode {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --bg-tertiary: #e5e7eb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            background: linear-gradient(135deg, #eff6ff 0%, #f3e8ff 100%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px;
+            margin-bottom: 32px;
+            border-radius: 12px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue-500), #2563eb);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--green-500), #059669);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--orange-500), #ea580c);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .category-section {
+            margin-bottom: 32px;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, var(--purple-500), #9333ea);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-header.gaming { background: linear-gradient(135deg, #a855f7, #ec4899); }
+        .category-header.vpn { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+        .category-header.monitoring { background: linear-gradient(135deg, #10b981, #059669); }
+        .category-header.database { background: linear-gradient(135deg, #f97316, #f59e0b); }
+        .category-header.infrastructure { background: linear-gradient(135deg, #ef4444, #f43f5e); }
+
+        table {
+            width: 100%;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        thead {
+            background: var(--bg-tertiary);
+        }
+
+        th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        td {
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        tbody tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .toggle {
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .toggle.active {
+            background: var(--green-500);
+        }
+
+        .toggle.inactive {
+            background: var(--red-500);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            top: 3px;
+            transition: left 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .toggle.inactive::after {
+            left: 3px;
+        }
+
+        .toggle.active::after {
+            left: 33px;
+        }
+
+        .icon-cell {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .icon-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .protocol-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .protocol-tcp { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .protocol-udp { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .protocol-both { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--blue-500), #7c3aed);
+            padding: 24px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        input, select, textarea {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--blue-500);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .icon-btn.edit {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        .icon-btn.delete {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        Gestionnaire de Ports pfSense
+                    </h1>
+                    <p style="color: var(--text-secondary); margin-top: 8px;">Version Standalone - Fonctionne sans serveur</p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn-secondary" onclick="toggleTheme()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        Thème
+                    </button>
+                    <button class="btn-warning" onclick="openModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Ajouter
+                    </button>
+                    <button class="btn-success" onclick="exportCSV()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Export CSV
+                    </button>
+                    <button class="btn-primary" onclick="saveToLocalStorage()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                            <polyline points="17 21 17 13 7 13 7 21"/>
+                            <polyline points="7 3 7 8 15 8"/>
+                        </svg>
+                        Sauvegarder
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div id="content"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Ajouter une règle</h2>
+                <button class="icon-btn" onclick="closeModal()" style="background: rgba(255,255,255,0.2); color: white;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="port-form" onsubmit="savePort(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Service/Application *</label>
+                            <input type="text" id="service" required placeholder="Ex: Grafana">
+                        </div>
+                        <div class="form-group">
+                            <label>Catégorie *</label>
+                            <select id="category" required>
+                                <option value="Gaming">Gaming</option>
+                                <option value="VPN">VPN</option>
+                                <option value="Monitoring">Monitoring</option>
+                                <option value="Database">Database</option>
+                                <option value="Infrastructure">Infrastructure</option>
+                                <option value="Administration">Administration</option>
+                                <option value="Network">Network</option>
+                                <option value="Home Automation">Home Automation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Port Interne *</label>
+                            <input type="text" id="port_internal" required placeholder="8080 ou 8000-8100">
+                        </div>
+                        <div class="form-group">
+                            <label>Port Externe *</label>
+                            <input type="text" id="port_external" required placeholder="48080 ou N/A">
+                        </div>
+                        <div class="form-group">
+                            <label>Protocole *</label>
+                            <select id="protocol" required>
+                                <option value="TCP">TCP</option>
+                                <option value="UDP">UDP</option>
+                                <option value="TCP/UDP">TCP/UDP</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Destination (VM/PC)</label>
+                            <input type="text" id="destination" placeholder="VM-Ubuntu-01">
+                        </div>
+                        <div class="form-group">
+                            <label>Adresse IP</label>
+                            <input type="text" id="ip_address" placeholder="192.168.1.100">
+                        </div>
+                        <div class="form-group">
+                            <label>Adresse MAC</label>
+                            <input type="text" id="mac_address" placeholder="00:1A:2B:3C:4D:5E">
+                        </div>
+                        <div class="form-group full">
+                            <label>URL de l'icône</label>
+                            <input type="url" id="icon_url" placeholder="https://example.com/icon.png">
+                        </div>
+                        <div class="form-group full">
+                            <label>Description *</label>
+                            <textarea id="description" required placeholder="Description de la règle..."></textarea>
+                        </div>
+                    </div>
+                    <div style="margin-top: 24px; display: flex; gap: 12px;">
+                        <button type="submit" class="btn-primary" style="flex: 1;">Sauvegarder</button>
+                        <button type="button" class="btn-secondary" onclick="closeModal()">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ports = [];
+        let editingIndex = -1;
+
+        // Données initiales
+        const initialPorts = [
+            {service: "Steam - Client", port_internal: "27015-27030", port_external: "52100-52115", protocol: "TCP/UDP", description: "Steam gaming ports", category: "Gaming", icon_url: "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/753/135dc1ac1cd9763dfc8ad52f4e880d2ac058a36c.jpg", is_active: true},
+            {service: "Counter-Strike 1.6", port_internal: "27015", port_external: "46015", protocol: "TCP/UDP", description: "CS 1.6 game server", category: "Gaming", icon_url: "https://cdn.cloudflare.steamstatic.com/steam/apps/10/header.jpg", is_active: false},
+            {service: "Satisfactory", port_internal: "7777", port_external: "48201", protocol: "UDP", description: "Game port principal", category: "Gaming", icon_url: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/header.jpg", is_active: false},
+            {service: "SCUM", port_internal: "7777", port_external: "47777", protocol: "UDP", description: "SCUM game port", category: "Gaming", icon_url: "https://cdn.cloudflare.steamstatic.com/steam/apps/513710/header.jpg", is_active: false},
+            {service: "Wreckfest", port_internal: "27015", port_external: "46016", protocol: "UDP", description: "Wreckfest server", category: "Gaming", icon_url: "https://cdn.cloudflare.steamstatic.com/steam/apps/228380/header.jpg", is_active: false},
+            {service: "Grafana", port_internal: "3000", port_external: "33100", protocol: "TCP", description: "Interface web Grafana", category: "Monitoring", icon_url: "https://raw.githubusercontent.com/grafana/grafana/main/public/img/grafana_icon.svg", is_active: true},
+            {service: "Prometheus", port_internal: "9090", port_external: "39090", protocol: "TCP", description: "Prometheus metrics", category: "Monitoring", icon_url: "https://raw.githubusercontent.com/prometheus/prometheus/main/web/ui/static/img/prometheus_logo.svg", is_active: true},
+            {service: "Loki", port_internal: "3100", port_external: "43100", protocol: "TCP", description: "Loki logs", category: "Monitoring", icon_url: "https://grafana.com/static/img/logos/logo-loki.svg", is_active: true},
+            {service: "Tempo", port_internal: "3200", port_external: "43200", protocol: "TCP", description: "Tempo traces", category: "Monitoring", icon_url: "https://grafana.com/static/img/logos/logo-tempo.svg", is_active: true},
+            {service: "Kubernetes", port_internal: "6443", port_external: "36443", protocol: "TCP", description: "Kubernetes API", category: "Infrastructure", icon_url: "https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg", is_active: true},
+        ];
+
+        function init() {
+            const saved = localStorage.getItem('pfsense_ports');
+            ports = saved ? JSON.parse(saved) : initialPorts;
+            render();
+        }
+
+        function render() {
+            const grouped = ports.reduce((acc, port, index) => {
+                port.index = index;
+                if (!acc[port.category]) acc[port.category] = [];
+                acc[port.category].push(port);
+                return acc;
+            }, {});
+
+            let html = '';
+            Object.keys(grouped).sort().forEach(category => {
+                html += `
+                    <div class="category-section">
+                        <div class="category-header ${category.toLowerCase().replace(/\s+/g, '-')}">
+                            ${category} (${grouped[category].length} règles)
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>État</th>
+                                    <th>Icône</th>
+                                    <th>Service</th>
+                                    <th>Port Interne</th>
+                                    <th>Port Externe</th>
+                                    <th>Protocole</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${grouped[category].map(port => `
+                                    <tr>
+                                        <td>
+                                            <div class="toggle ${port.is_active ? 'active' : 'inactive'}" onclick="togglePort(${port.index})"></div>
+                                        </td>
+                                        <td>
+                                            ${port.icon_url ? 
+                                                `<img src="${port.icon_url}" class="icon-cell" alt="${port.service}">` : 
+                                                `<div class="icon-placeholder">${port.service.charAt(0)}</div>`
+                                            }
+                                        </td>
+                                        <td><strong>${port.service}</strong></td>
+                                        <td><code>${port.port_internal}</code></td>
+                                        <td><code>${port.port_external}</code></td>
+                                        <td>
+                                            <span class="protocol-badge protocol-${port.protocol.includes('/') ? 'both' : port.protocol.toLowerCase()}">
+                                                ${port.protocol}
+                                            </span>
+                                        </td>
+                                        <td>${port.description}</td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="icon-btn edit" onclick="editPort(${port.index})">
+                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                                    </svg>
+                                                </button>
+                                                <button class="icon-btn delete" onclick="deletePort(${port.index})">
+                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <polyline points="3 6 5 6 21 6"/>
+                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            });
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        function togglePort(index) {
+            ports[index].is_active = !ports[index].is_active;
+            render();
+            saveToLocalStorage();
+        }
+
+        function openModal() {
+            editingIndex = -1;
+            document.getElementById('modal-title').textContent = 'Ajouter une règle';
+            document.getElementById('port-form').reset();
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function editPort(index) {
+            editingIndex = index;
+            const port = ports[index];
+            document.getElementById('modal-title').textContent = 'Modifier la règle';
+            document.getElementById('service').value = port.service;
+            document.getElementById('category').value = port.category;
+            document.getElementById('port_internal').value = port.port_internal;
+            document.getElementById('port_external').value = port.port_external;
+            document.getElementById('protocol').value = port.protocol;
+            document.getElementById('destination').value = port.destination || '';
+            document.getElementById('ip_address').value = port.ip_address || '';
+            document.getElementById('mac_address').value = port.mac_address || '';
+            document.getElementById('icon_url').value = port.icon_url || '';
+            document.getElementById('description').value = port.description;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function savePort(e) {
+            e.preventDefault();
+            const port = {
+                service: document.getElementById('service').value,
+                category: document.getElementById('category').value,
+                port_internal: document.getElementById('port_internal').value,
+                port_external: document.getElementById('port_external').value,
+                protocol: document.getElementById('protocol').value,
+                destination: document.getElementById('destination').value,
+                ip_address: document.getElementById('ip_address').value,
+                mac_address: document.getElementById('mac_address').value,
+                icon_url: document.getElementById('icon_url').value,
+                description: document.getElementById('description').value,
+                is_active: true
+            };
+
+            if (editingIndex >= 0) {
+                ports[editingIndex] = {...ports[editingIndex], ...port};
+            } else {
+                ports.push(port);
+            }
+
+            closeModal();
+            render();
+            saveToLocalStorage();
+        }
+
+        function deletePort(index) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette règle ?')) {
+                ports.splice(index, 1);
+                render();
+                saveToLocalStorage();
+            }
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('pfsense_ports', JSON.stringify(ports));
+            alert('Données sauvegardées avec succès dans le navigateur !');
+        }
+
+        function exportCSV() {
+            let csv = 'Service;Port Interne;Port Externe;Protocole;Description;Catégorie;Destination;IP;MAC;Actif\n';
+            ports.forEach(port => {
+                csv += `${port.service};${port.port_internal};${port.port_external};${port.protocol};${port.description};${port.category};${port.destination || ''};${port.ip_address || ''};${port.mac_address || ''};${port.is_active ? 'Oui' : 'Non'}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'pfsense_ports.csv';
+            link.click();
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+
+        // Charger le thème sauvegardé
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        init();
+    </script>
+</body>
+</html>

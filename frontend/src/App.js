@@ -48,6 +48,7 @@ function App() {
     return saved ? JSON.parse(saved) : true;
   });
   const [newCategory, setNewCategory] = useState("");
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
   const [deviceFormData, setDeviceFormData] = useState({
     hostname: "",
     ip_address: "",

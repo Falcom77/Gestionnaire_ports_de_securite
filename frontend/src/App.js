@@ -507,20 +507,22 @@ function App() {
                           <td className={`px-2 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.destination || '-'}</td>
                           <td className={`px-2 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.ip_address || '-'}</td>
                           <td className="px-2 py-3">
-                            <div className="flex gap-2">
+                            <div className="flex gap-2 justify-center">
                               <button
                                 onClick={() => handleEdit(port)}
-                                className={`p-1 rounded transition-all ${darkMode ? 'text-blue-400 hover:text-blue-300 hover:bg-blue-500/10' : 'text-blue-600 hover:text-blue-700 hover:bg-blue-100'}`}
+                                className={`p-2 rounded-lg transition-all ${darkMode ? 'bg-blue-500/20 text-blue-400 hover:bg-blue-500/30' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'}`}
                                 data-testid={`edit-port-${port.id}`}
+                                title="Modifier"
                               >
-                                <Edit className="w-5 h-5" />
+                                <Edit className="w-6 h-6" />
                               </button>
                               <button
                                 onClick={() => handleDelete(port.id)}
-                                className={`p-1 rounded transition-all ${darkMode ? 'text-red-400 hover:text-red-300 hover:bg-red-500/10' : 'text-red-600 hover:text-red-700 hover:bg-red-100'}`}
+                                className={`p-2 rounded-lg transition-all ${darkMode ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30' : 'bg-red-100 text-red-700 hover:bg-red-200'}`}
                                 data-testid={`delete-port-${port.id}`}
+                                title="Supprimer"
                               >
-                                <Trash2 className="w-5 h-5" />
+                                <Trash2 className="w-6 h-6" />
                               </button>
                             </div>
                           </td>

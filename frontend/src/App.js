@@ -3,7 +3,7 @@ import axios from "axios";
 import { 
   Gamepad2, Shield, Activity, Database, Server, 
   Settings, Wifi, Home, Plus, Edit, Trash2, 
-  Download, Save, X 
+  Download, Save, X, Moon, Sun, FolderPlus
 } from "lucide-react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;

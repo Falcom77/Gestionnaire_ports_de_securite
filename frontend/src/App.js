@@ -194,6 +194,16 @@ function App() {
     }
   };
 
+  const handleAddCategory = () => {
+    if (newCategory.trim() && !categories.includes(newCategory.trim())) {
+      const updatedCategories = [...categories, newCategory.trim()].sort();
+      setCategories(updatedCategories);
+      setFormData({...formData, category: newCategory.trim()});
+      setNewCategory("");
+      setShowCategoryModal(false);
+    }
+  };
+
   const groupedPorts = ports.reduce((acc, port) => {
     if (!acc[port.category]) {
       acc[port.category] = [];

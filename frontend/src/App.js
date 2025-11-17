@@ -394,8 +394,36 @@ function App() {
         </div>
       </header>
 
+      {/* Tabs */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className={`flex gap-4 border-b-2 ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+          <button
+            onClick={() => setActiveTab('ports')}
+            className={`px-6 py-3 font-semibold transition-all ${
+              activeTab === 'ports'
+                ? `border-b-4 ${darkMode ? 'border-blue-500 text-blue-400' : 'border-blue-600 text-blue-600'}`
+                : `${darkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-600 hover:text-gray-900'}`
+            }`}
+            data-testid="tab-ports"
+          >
+            📋 Règles de Ports ({ports.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('devices')}
+            className={`px-6 py-3 font-semibold transition-all ${
+              activeTab === 'devices'
+                ? `border-b-4 ${darkMode ? 'border-blue-500 text-blue-400' : 'border-blue-600 text-blue-600'}`
+                : `${darkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-600 hover:text-gray-900'}`
+            }`}
+            data-testid="tab-devices"
+          >
+            💻 Parc Informatique ({devices.length})
+          </button>
+        </div>
+      </div>
+
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         {Object.keys(groupedPorts).sort().map((category) => {
           const Icon = categoryIcons[category] || Server;
           const gradient = categoryColors[category] || "from-gray-500 to-gray-600";

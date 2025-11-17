@@ -70,6 +70,7 @@ class PortRuleUpdate(BaseModel):
     destination: Optional[str] = None
     ip_address: Optional[str] = None
     mac_address: Optional[str] = None
+    icon_url: Optional[str] = None
     is_active: Optional[bool] = None
 
 

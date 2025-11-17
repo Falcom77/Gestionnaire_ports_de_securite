@@ -808,7 +808,15 @@ function App() {
                   </label>
                   <select
                     value={formData.destination}
-                    onChange={(e) => setFormData({...formData, destination: e.target.value})}
+                    onChange={(e) => {
+                      const selectedHostname = e.target.value;
+                      const selectedDevice = devices.find(d => d.hostname === selectedHostname);
+                      setFormData({
+                        ...formData, 
+                        destination: selectedHostname,
+                        ip_address: selectedDevice ? selectedDevice.ip_address : formData.ip_address
+                      });
+                    }}
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       darkMode 
                         ? 'bg-gray-900 border-gray-700 text-white' 
@@ -818,11 +826,13 @@ function App() {
                   >
                     <option value="">-- Sélectionner un périphérique --</option>
                     {devices.map(device => (
-                      <option key={device.id} value={device.hostname}>{device.hostname}</option>
+                      <option key={device.id} value={device.hostname}>
+                        {device.hostname} ({device.ip_address})
+                      </option>
                     ))}
                   </select>
                   <p className={`text-xs mt-1 ${darkMode ? 'text-gray-500' : 'text-gray-600'}`}>
-                    Ou ajoutez un périphérique dans l'onglet "Parc Informatique"
+                    L'adresse IP sera automatiquement remplie
                   </p>
                 </div>
 

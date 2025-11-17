@@ -945,6 +945,146 @@ function App() {
           </div>
         </div>
       )}
+
+      {/* Modal Device */}
+      {showDeviceModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className={`rounded-lg shadow-2xl max-w-2xl w-full border ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+            <div className="bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-4 flex justify-between items-center sticky top-0 z-10">
+              <h3 className="text-xl font-bold text-white">
+                {editingDevice ? 'Modifier le périphérique' : 'Ajouter un périphérique'}
+              </h3>
+              <button
+                onClick={closeDeviceModal}
+                className="text-white hover:bg-white/20 rounded-lg p-1 transition-all"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <form onSubmit={handleDeviceSubmit} className="p-6 space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Hostname <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={deviceFormData.hostname}
+                    onChange={(e) => setDeviceFormData({...deviceFormData, hostname: e.target.value})}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                    }`}
+                    placeholder="serveur-web-01"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Type de Périphérique <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={deviceFormData.device_type}
+                    onChange={(e) => setDeviceFormData({...deviceFormData, device_type: e.target.value})}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white' 
+                        : 'bg-white border-gray-300 text-gray-900'
+                    }`}
+                    required
+                  >
+                    <option value="PC">PC</option>
+                    <option value="VM">VM</option>
+                    <option value="Raspberry Pi">Raspberry Pi</option>
+                    <option value="Tablette">Tablette</option>
+                    <option value="Smartphone">Smartphone</option>
+                    <option value="NUC">NUC</option>
+                    <option value="Routeur">Routeur</option>
+                    <option value="NAS">NAS</option>
+                    <option value="Serveur">Serveur</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Adresse IP/Masque <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={deviceFormData.ip_address}
+                    onChange={(e) => setDeviceFormData({...deviceFormData, ip_address: e.target.value})}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                    }`}
+                    placeholder="192.168.1.100/24"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Adresse MAC
+                  </label>
+                  <input
+                    type="text"
+                    value={deviceFormData.mac_address}
+                    onChange={(e) => setDeviceFormData({...deviceFormData, mac_address: e.target.value})}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                    }`}
+                    placeholder="00:1A:2B:3C:4D:5E"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                  Description
+                </label>
+                <textarea
+                  value={deviceFormData.description}
+                  onChange={(e) => setDeviceFormData({...deviceFormData, description: e.target.value})}
+                  className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
+                    darkMode 
+                      ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                  }`}
+                  rows="3"
+                  placeholder="Serveur web principal pour l'application..."
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4 border-t border-gray-700 mt-6">
+                <button
+                  type="submit"
+                  className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-6 py-3 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg font-semibold"
+                >
+                  <Save className="w-5 h-5" />
+                  {editingDevice ? 'Mettre à jour' : 'Créer le périphérique'}
+                </button>
+                <button
+                  type="button"
+                  onClick={closeDeviceModal}
+                  className={`px-6 py-3 rounded-lg transition-all font-medium ${
+                    darkMode 
+                      ? 'bg-gray-700 hover:bg-gray-600 text-white' 
+                      : 'bg-gray-200 hover:bg-gray-300 text-gray-900'
+                  }`}
+                >
+                  Annuler
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

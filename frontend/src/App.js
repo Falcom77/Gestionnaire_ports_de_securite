@@ -689,7 +689,7 @@ function App() {
       {/* Modal Formulaire */}
       {showModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className={`rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-300'}`}>
+          <div className={`rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-200 border-gray-400'}`}>
             <div className="bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-4 flex justify-between items-center sticky top-0 z-10">
               <h3 className="text-xl font-bold text-white">
                 {editingPort ? 'Modifier la règle' : 'Ajouter une règle'}

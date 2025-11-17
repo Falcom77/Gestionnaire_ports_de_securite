@@ -101,3 +101,86 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test de l'application pfSense - Gestionnaire de Ports at https://netportal-2.preview.emergentagent.com"
+
+frontend:
+  - task: "Main page ports tab functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify page loads, no horizontal scroll, all columns visible, rules grouped by categories, toggle functionality, Add Port button"
+
+  - task: "Parc Informatique tab functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify column order, sorting by Hostname and IP, Add Device button"
+
+  - task: "Export functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify Export Complet downloads .xlsx file with correct name"
+
+  - task: "Theme toggle functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify dark/light mode toggle works correctly"
+
+  - task: "Responsive design"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial testing - need to verify 1920x1080 display without horizontal scroll"
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+
+test_plan:
+  current_focus:
+    - "Main page ports tab functionality"
+    - "Parc Informatique tab functionality"
+    - "Export functionality"
+    - "Theme toggle functionality"
+    - "Responsive design"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "testing"
+    message: "Starting comprehensive UI testing of pfSense port manager application. Will test all major functionality including ports tab, devices tab, export, theme toggle, and responsiveness."

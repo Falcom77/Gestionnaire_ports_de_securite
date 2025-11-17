@@ -72,6 +72,7 @@ function App() {
   useEffect(() => {
     fetchPorts();
     fetchCategories();
+    fetchDevices();
   }, []);
 
   useEffect(() => {

@@ -38,12 +38,23 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [showDeviceModal, setShowDeviceModal] = useState(false);
   const [editingPort, setEditingPort] = useState(null);
+  const [editingDevice, setEditingDevice] = useState(null);
+  const [activeTab, setActiveTab] = useState('ports'); // 'ports' or 'devices'
+  const [devices, setDevices] = useState([]);
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode');
     return saved ? JSON.parse(saved) : true;
   });
   const [newCategory, setNewCategory] = useState("");
+  const [deviceFormData, setDeviceFormData] = useState({
+    hostname: "",
+    ip_address: "",
+    mac_address: "",
+    device_type: "PC",
+    description: ""
+  });
   const [formData, setFormData] = useState({
     service: "",
     port_internal: "",

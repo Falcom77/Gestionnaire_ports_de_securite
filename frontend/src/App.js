@@ -334,7 +334,7 @@ function App() {
               </h1>
               <p className={`mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Configuration et gestion des règles de pare-feu</p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 flex-wrap">
               <button
                 onClick={toggleDarkMode}
                 className={`p-3 rounded-lg flex items-center gap-2 transition-all shadow-lg ${darkMode ? 'bg-gray-700 hover:bg-gray-600 text-yellow-400' : 'bg-gray-800 hover:bg-gray-700 text-yellow-300'}`}
@@ -343,37 +343,51 @@ function App() {
               >
                 {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
+              {activeTab === 'ports' && (
+                <>
+                  <button
+                    onClick={() => setShowCategoryModal(true)}
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg ${darkMode ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700' : 'bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600'} text-white`}
+                    data-testid="add-category-button"
+                  >
+                    <FolderPlus className="w-5 h-5" />
+                    Catégorie
+                  </button>
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg"
+                    data-testid="add-port-button"
+                  >
+                    <Plus className="w-5 h-5" />
+                    Ajouter Port
+                  </button>
+                  <button
+                    onClick={exportPfSense}
+                    className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg"
+                    data-testid="export-pfsense-button"
+                  >
+                    <Download className="w-5 h-5" />
+                    pfSense
+                  </button>
+                </>
+              )}
+              {activeTab === 'devices' && (
+                <button
+                  onClick={() => setShowDeviceModal(true)}
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg"
+                  data-testid="add-device-button"
+                >
+                  <Plus className="w-5 h-5" />
+                  Ajouter Périphérique
+                </button>
+              )}
               <button
-                onClick={() => setShowCategoryModal(true)}
-                className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg ${darkMode ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700' : 'bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600'} text-white`}
-                data-testid="add-category-button"
-              >
-                <FolderPlus className="w-5 h-5" />
-                Catégorie
-              </button>
-              <button
-                onClick={() => setShowModal(true)}
-                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg"
-                data-testid="add-port-button"
-              >
-                <Plus className="w-5 h-5" />
-                Ajouter
-              </button>
-              <button
-                onClick={exportCSV}
+                onClick={exportFullCSV}
                 className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg"
-                data-testid="export-csv-button"
+                data-testid="export-full-button"
               >
                 <Download className="w-5 h-5" />
-                Export CSV
-              </button>
-              <button
-                onClick={exportPfSense}
-                className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg"
-                data-testid="export-pfsense-button"
-              >
-                <Download className="w-5 h-5" />
-                Export pfSense
+                Export Complet
               </button>
             </div>
           </div>

@@ -343,6 +343,15 @@ function App() {
                               }`} />
                             </button>
                           </td>
+                          <td className="px-4 py-3">
+                            {port.icon_url ? (
+                              <img src={port.icon_url} alt={port.service} className="w-8 h-8 rounded object-cover" onError={(e) => e.target.style.display = 'none'} />
+                            ) : (
+                              <div className={`w-8 h-8 rounded flex items-center justify-center text-xs font-bold ${darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-200 text-gray-500'}`}>
+                                {port.service.charAt(0)}
+                              </div>
+                            )}
+                          </td>
                           <td className={`px-4 py-3 font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{port.service}</td>
                           <td className="px-4 py-3">
                             <code className={`px-2 py-1 rounded ${darkMode ? 'text-blue-400 bg-gray-900/50' : 'text-blue-600 bg-blue-50'}`}>{port.port_internal}</code>

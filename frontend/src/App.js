@@ -906,7 +906,7 @@ function App() {
                   className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                     darkMode 
                       ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                      : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
                   }`}
                   rows="3"
                   placeholder="Description de la règle..."
@@ -1064,7 +1064,7 @@ function App() {
                   className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
                     darkMode 
                       ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                      : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
                   }`}
                   rows="3"
                   placeholder="Serveur web principal pour l'application..."

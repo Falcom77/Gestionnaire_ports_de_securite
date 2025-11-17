@@ -449,19 +449,19 @@ function App() {
 
               <div className={`backdrop-blur-lg rounded-lg shadow-xl overflow-hidden border ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-gray-50/90 border-gray-300'}`}>
                 <div className="overflow-x-auto">
-                  <table className="w-full" style={{tableLayout: 'fixed', minWidth: '1600px'}}>
+                  <table className="w-full" style={{tableLayout: 'fixed'}}>
                     <thead className={darkMode ? 'bg-gray-900/50' : 'bg-gray-100'}>
                       <tr>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '90px'}}>État</th>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '60px'}}>Icône</th>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '200px'}}>Service</th>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '130px'}}>Port Interne</th>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '130px'}}>Port Externe</th>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '100px'}}>Protocole</th>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '280px'}}>Description</th>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '160px'}}>Destination</th>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '180px'}}>IP</th>
-                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '90px'}}>Actions</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '85px'}}>État</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '55px'}}>Icône</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '180px'}}>Service</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '120px'}}>Port Interne</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '120px'}}>Port Externe</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '90px'}}>Protocole</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '240px'}}>Description</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '140px'}}>Destination</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '150px'}}>IP</th>
+                        <th className={`px-3 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '85px'}}>Actions</th>
                       </tr>
                     </thead>
                     <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>

@@ -223,17 +223,33 @@ function App() {
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
       {/* Header */}
-      <header className="bg-gray-800/50 backdrop-blur-lg border-b border-gray-700 sticky top-0 z-40">
+      <header className={`backdrop-blur-lg border-b sticky top-0 z-40 ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-white/80 border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-                <Shield className="w-8 h-8 text-blue-400" />
+              <h1 className={`text-3xl font-bold flex items-center gap-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                <Shield className={`w-8 h-8 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} />
                 Gestionnaire de Ports pfSense
               </h1>
-              <p className="text-gray-400 mt-1">Configuration et gestion des règles de pare-feu</p>
+              <p className={`mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Configuration et gestion des règles de pare-feu</p>
             </div>
             <div className="flex gap-3">
+              <button
+                onClick={toggleDarkMode}
+                className={`p-3 rounded-lg flex items-center gap-2 transition-all shadow-lg ${darkMode ? 'bg-gray-700 hover:bg-gray-600 text-yellow-400' : 'bg-gray-800 hover:bg-gray-700 text-yellow-300'}`}
+                data-testid="toggle-theme-button"
+                title={darkMode ? "Mode clair" : "Mode sombre"}
+              >
+                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+              <button
+                onClick={() => setShowCategoryModal(true)}
+                className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg ${darkMode ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700' : 'bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600'} text-white`}
+                data-testid="add-category-button"
+              >
+                <FolderPlus className="w-5 h-5" />
+                Catégorie
+              </button>
               <button
                 onClick={() => setShowModal(true)}
                 className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg"

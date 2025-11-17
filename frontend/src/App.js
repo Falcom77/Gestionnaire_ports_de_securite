@@ -577,7 +577,7 @@ function App() {
                         className={`transition-colors ${
                           darkMode 
                             ? `hover:bg-gray-700/50 ${idx % 2 === 0 ? 'bg-gray-800/30' : 'bg-gray-800/10'}` 
-                            : `hover:bg-gray-200/50 ${idx % 2 === 0 ? 'bg-gray-100/60' : 'bg-gray-50'}`
+                            : `hover:bg-gray-300/50 ${idx % 2 === 0 ? 'bg-gray-200/60' : 'bg-gray-100'}`
                         }`}
                       >
                         <td className={`px-4 py-3 font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>

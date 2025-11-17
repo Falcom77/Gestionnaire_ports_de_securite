@@ -475,7 +475,7 @@ function App() {
                           }`}
                           data-testid={`port-row-${port.id}`}
                         >
-                          <td className="px-4 py-3">
+                          <td className="px-3 py-3">
                             <button
                               onClick={() => togglePortStatus(port.id, port.is_active)}
                               className={`w-16 h-8 rounded-full transition-all shadow-inner ${
@@ -490,7 +490,7 @@ function App() {
                               }`} />
                             </button>
                           </td>
-                          <td className="px-4 py-3">
+                          <td className="px-3 py-3">
                             {port.icon_url ? (
                               <img src={port.icon_url} alt={port.service} className="w-8 h-8 rounded object-cover" onError={(e) => e.target.style.display = 'none'} />
                             ) : (
@@ -499,14 +499,14 @@ function App() {
                               </div>
                             )}
                           </td>
-                          <td className={`px-4 py-3 font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{port.service}</td>
-                          <td className="px-4 py-3">
-                            <code className={`px-2 py-1 rounded ${darkMode ? 'text-blue-400 bg-gray-900/50' : 'text-blue-600 bg-blue-50'}`}>{port.port_internal}</code>
+                          <td className={`px-3 py-3 font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.service}</td>
+                          <td className="px-3 py-3">
+                            <code className={`px-2 py-1 rounded text-xs ${darkMode ? 'text-blue-400 bg-gray-900/50' : 'text-blue-600 bg-blue-50'}`}>{port.port_internal}</code>
                           </td>
-                          <td className="px-4 py-3">
-                            <code className={`px-2 py-1 rounded ${darkMode ? 'text-purple-400 bg-gray-900/50' : 'text-purple-600 bg-purple-50'}`}>{port.port_external}</code>
+                          <td className="px-3 py-3">
+                            <code className={`px-2 py-1 rounded text-xs ${darkMode ? 'text-purple-400 bg-gray-900/50' : 'text-purple-600 bg-purple-50'}`}>{port.port_external}</code>
                           </td>
-                          <td className="px-4 py-3">
+                          <td className="px-3 py-3">
                             <span className={`px-2 py-1 rounded text-xs font-semibold ${
                               port.protocol.includes('TCP') && port.protocol.includes('UDP')
                                 ? darkMode ? 'bg-yellow-500/20 text-yellow-300' : 'bg-yellow-100 text-yellow-800'
@@ -517,10 +517,10 @@ function App() {
                               {port.protocol}
                             </span>
                           </td>
-                          <td className={`px-4 py-3 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.description}</td>
-                          <td className={`px-4 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.destination || '-'}</td>
-                          <td className={`px-4 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.ip_address || '-'}</td>
-                          <td className="px-4 py-3">
+                          <td className={`px-3 py-3 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.description}</td>
+                          <td className={`px-3 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.destination || '-'}</td>
+                          <td className={`px-3 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.ip_address || '-'}</td>
+                          <td className="px-3 py-3">
                             <div className="flex gap-2">
                               <button
                                 onClick={() => handleEdit(port)}

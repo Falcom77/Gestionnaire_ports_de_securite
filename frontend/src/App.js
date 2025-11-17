@@ -108,6 +108,15 @@ function App() {
     }
   };
 
+  const fetchDevices = async () => {
+    try {
+      const response = await axios.get(`${API}/devices`);
+      setDevices(response.data);
+    } catch (error) {
+      console.error("Error fetching devices:", error);
+    }
+  };
+
   const togglePortStatus = async (portId, currentStatus) => {
     try {
       await axios.put(`${API}/ports/${portId}`, { is_active: !currentStatus });

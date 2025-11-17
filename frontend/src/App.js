@@ -652,19 +652,23 @@ function App() {
                 </label>
               </div>
 
-              <div className="flex gap-3 pt-4">
+              <div className="flex gap-3 pt-4 border-t border-gray-700 mt-6">
                 <button
                   type="submit"
                   className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg font-semibold"
                   data-testid="save-port-button"
                 >
                   <Save className="w-5 h-5" />
-                  {editingPort ? 'Mettre à jour' : 'Créer'}
+                  {editingPort ? 'Mettre à jour' : 'Créer la règle'}
                 </button>
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-all"
+                  className={`px-6 py-3 rounded-lg transition-all font-medium ${
+                    darkMode 
+                      ? 'bg-gray-700 hover:bg-gray-600 text-white' 
+                      : 'bg-gray-200 hover:bg-gray-300 text-gray-900'
+                  }`}
                   data-testid="cancel-button"
                 >
                   Annuler

@@ -630,7 +630,7 @@ function App() {
       {/* Modal Catégorie */}
       {showCategoryModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className={`rounded-lg shadow-2xl max-w-md w-full border ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-300'}`}>
+          <div className={`rounded-lg shadow-2xl max-w-md w-full border ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-200 border-gray-400'}`}>
             <div className="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4 flex justify-between items-center">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 <FolderPlus className="w-6 h-6" />

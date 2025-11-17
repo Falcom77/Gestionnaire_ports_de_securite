@@ -429,7 +429,7 @@ function App() {
       </header>
 
       {/* Tabs */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-full mx-auto px-2 py-4">
         <div className={`flex gap-4 border-b-2 ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
           <button
             onClick={() => setActiveTab('ports')}

@@ -324,6 +324,120 @@ async def export_pfsense():
     )
 
 
+# Device Routes
+@api_router.get("/devices", response_model=List[Device])
+async def get_devices():
+    """Get all devices"""
+    devices = await db.devices.find({}, {"_id": 0}).to_list(1000)
+    
+    for device in devices:
+        if isinstance(device.get('created_at'), str):
+            device['created_at'] = datetime.fromisoformat(device['created_at'])
+    
+    return devices
+
+@api_router.post("/devices", response_model=Device)
+async def create_device(device: DeviceCreate):
+    """Create a new device"""
+    device_obj = Device(**device.model_dump())
+    doc = device_obj.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    
+    await db.devices.insert_one(doc)
+    return device_obj
+
+@api_router.put("/devices/{device_id}", response_model=Device)
+async def update_device(device_id: str, device_update: DeviceUpdate):
+    """Update an existing device"""
+    existing_device = await db.devices.find_one({"id": device_id}, {"_id": 0})
+    if not existing_device:
+        raise HTTPException(status_code=404, detail="Device not found")
+    
+    update_data = {k: v for k, v in device_update.model_dump().items() if v is not None}
+    
+    if update_data:
+        await db.devices.update_one({"id": device_id}, {"$set": update_data})
+    
+    updated_device = await db.devices.find_one({"id": device_id}, {"_id": 0})
+    if isinstance(updated_device.get('created_at'), str):
+        updated_device['created_at'] = datetime.fromisoformat(updated_device['created_at'])
+    
+    return Device(**updated_device)
+
+@api_router.delete("/devices/{device_id}")
+async def delete_device(device_id: str):
+    """Delete a device"""
+    result = await db.devices.delete_one({"id": device_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Device not found")
+    return {"message": "Device deleted successfully"}
+
+@api_router.delete("/categories/{category_name}")
+async def delete_category(category_name: str):
+    """Delete a category and all its port rules"""
+    result = await db.port_rules.delete_many({"category": category_name})
+    return {"message": f"Category '{category_name}' deleted with {result.deleted_count} port rules"}
+
+@api_router.get("/export/csv-full")
+async def export_csv_full():
+    """Export both ports and devices to separate CSV files in a ZIP"""
+    import zipfile
+    from io import BytesIO
+    
+    # Get data
+    ports = await db.port_rules.find({}, {"_id": 0}).to_list(1000)
+    devices = await db.devices.find({}, {"_id": 0}).to_list(1000)
+    
+    # Create ZIP file in memory
+    zip_buffer = BytesIO()
+    
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        # Ports CSV
+        ports_csv = io.StringIO()
+        writer = csv.writer(ports_csv, delimiter=';')
+        writer.writerow([
+            "Service/Application", "Port(s) Interne", "Port(s) Externe", 
+            "Protocole", "Description", "Destination (VM/PC)", 
+            "Adresse IP", "Adresse MAC", "Actif"
+        ])
+        for port in ports:
+            writer.writerow([
+                port.get('service', ''),
+                port.get('port_internal', ''),
+                port.get('port_external', ''),
+                port.get('protocol', ''),
+                port.get('description', ''),
+                port.get('destination', ''),
+                port.get('ip_address', ''),
+                port.get('mac_address', ''),
+                'Oui' if port.get('is_active') else 'Non'
+            ])
+        zip_file.writestr('pfsense_ports.csv', ports_csv.getvalue())
+        
+        # Devices CSV
+        devices_csv = io.StringIO()
+        writer = csv.writer(devices_csv, delimiter=';')
+        writer.writerow([
+            "Hostname", "Adresse IP", "Adresse MAC", "Type de Périphérique", "Description"
+        ])
+        for device in devices:
+            writer.writerow([
+                device.get('hostname', ''),
+                device.get('ip_address', ''),
+                device.get('mac_address', ''),
+                device.get('device_type', ''),
+                device.get('description', '')
+            ])
+        zip_file.writestr('parc_informatique.csv', devices_csv.getvalue())
+    
+    zip_buffer.seek(0)
+    return StreamingResponse(
+        iter([zip_buffer.getvalue()]),
+        media_type="application/zip",
+        headers={"Content-Disposition": "attachment; filename=pfsense_export_complet.zip"}
+    )
+
+
 # Include the router in the main app
 app.include_router(api_router)
 

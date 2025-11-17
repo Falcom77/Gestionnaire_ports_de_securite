@@ -716,7 +716,7 @@ function App() {
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       darkMode 
                         ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                        : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
+                        : 'bg-gray-300 border-gray-400 text-gray-900 placeholder-gray-600'
                     }`}
                     placeholder="Ex: Grafana"
                     required
@@ -755,7 +755,7 @@ function App() {
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       darkMode 
                         ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                        : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
+                        : 'bg-gray-300 border-gray-400 text-gray-900 placeholder-gray-600'
                     }`}
                     placeholder="8080 ou 8000-8100"
                     required
@@ -774,7 +774,7 @@ function App() {
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       darkMode 
                         ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                        : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
+                        : 'bg-gray-300 border-gray-400 text-gray-900 placeholder-gray-600'
                     }`}
                     placeholder="48080 ou N/A"
                     required
@@ -847,7 +847,7 @@ function App() {
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       darkMode 
                         ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                        : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
+                        : 'bg-gray-300 border-gray-400 text-gray-900 placeholder-gray-600'
                     }`}
                     placeholder="192.168.1.100"
                     data-testid="input-ip-address"
@@ -865,7 +865,7 @@ function App() {
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       darkMode 
                         ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                        : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
+                        : 'bg-gray-300 border-gray-400 text-gray-900 placeholder-gray-600'
                     }`}
                     placeholder="00:1A:2B:3C:4D:5E"
                     data-testid="input-mac-address"
@@ -884,7 +884,7 @@ function App() {
                       className={`flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                         darkMode 
                           ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                          : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
+                          : 'bg-gray-300 border-gray-400 text-gray-900 placeholder-gray-600'
                       }`}
                       placeholder="https://example.com/icon.png"
                       data-testid="input-icon-url"
@@ -985,7 +985,7 @@ function App() {
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
                       darkMode 
                         ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                        : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
+                        : 'bg-gray-300 border-gray-400 text-gray-900 placeholder-gray-600'
                     }`}
                     placeholder="serveur-web-01"
                     required
@@ -1029,7 +1029,7 @@ function App() {
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
                       darkMode 
                         ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                        : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
+                        : 'bg-gray-300 border-gray-400 text-gray-900 placeholder-gray-600'
                     }`}
                     placeholder="192.168.1.100/24"
                     required
@@ -1047,7 +1047,7 @@ function App() {
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
                       darkMode 
                         ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                        : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
+                        : 'bg-gray-300 border-gray-400 text-gray-900 placeholder-gray-600'
                     }`}
                     placeholder="00:1A:2B:3C:4D:5E"
                   />

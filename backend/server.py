@@ -120,17 +120,41 @@ async def init_default_ports():
             {"service": "OpenTelemetry - HTTP", "port_internal": "4318", "port_external": "34318", "protocol": "TCP", "description": "OTLP HTTP receiver", "category": "Infrastructure", "icon_url": "https://opentelemetry.io/img/logos/opentelemetry-horizontal-color.svg", "is_active": True},
             
             # Administration
-            {"service": "Contrôle à distance - SSH", "port_internal": "22", "port_external": "50022", "protocol": "TCP", "description": "Secure Shell", "category": "Administration", "is_active": True},
-            {"service": "Contrôle à distance - RDP", "port_internal": "3389", "port_external": "53389", "protocol": "TCP", "description": "Remote Desktop Protocol", "category": "Administration", "is_active": False},
-            {"service": "Proxmox", "port_internal": "8006", "port_external": "58006", "protocol": "TCP", "description": "Interface web Proxmox HTTPS", "category": "Administration", "is_active": True},
-            {"service": "QNAP - Web HTTPS", "port_internal": "443", "port_external": "58443", "protocol": "TCP", "description": "Interface web HTTPS", "category": "Administration", "is_active": True},
-            {"service": "IMM-2 HTTPS", "port_internal": "443", "port_external": "54443", "protocol": "TCP", "description": "IBM Integrated Management Module", "category": "Administration", "is_active": False},
+            {"service": "Contrôle à distance - SSH", "port_internal": "22", "port_external": "50022", "protocol": "TCP", "description": "Secure Shell", "category": "Administration", "icon_url": "", "is_active": True},
+            {"service": "Contrôle à distance - RDP", "port_internal": "3389", "port_external": "53389", "protocol": "TCP", "description": "Remote Desktop Protocol", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "Contrôle à distance - VNC", "port_internal": "5900", "port_external": "55900", "protocol": "TCP", "description": "VNC standard", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "Proxmox", "port_internal": "8006", "port_external": "58006", "protocol": "TCP", "description": "Interface web Proxmox HTTPS", "category": "Administration", "icon_url": "", "is_active": True},
+            {"service": "Proxmox - VNC", "port_internal": "5900-5999", "port_external": "56000-56099", "protocol": "TCP", "description": "Console VNC pour VMs", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "Proxmox - SPICE", "port_internal": "3128", "port_external": "53128", "protocol": "TCP", "description": "Console SPICE", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "Proxmox - SSH", "port_internal": "22", "port_external": "50223", "protocol": "TCP", "description": "SSH pour administration Proxmox", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "QNAP - Web HTTP", "port_internal": "8080", "port_external": "58080", "protocol": "TCP", "description": "Interface web HTTP", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "QNAP - Web HTTPS", "port_internal": "443", "port_external": "58443", "protocol": "TCP", "description": "Interface web HTTPS", "category": "Administration", "icon_url": "", "is_active": True},
+            {"service": "QNAP - Web HTTPS Alt", "port_internal": "8081", "port_external": "58081", "protocol": "TCP", "description": "Interface web HTTPS alternative", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "QNAP - Management", "port_internal": "5000", "port_external": "55000", "protocol": "TCP", "description": "QNAP Management HTTP", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "QNAP - Management SSL", "port_internal": "5001", "port_external": "55001", "protocol": "TCP", "description": "QNAP Management HTTPS", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "QNAP - SMB", "port_internal": "139", "port_external": "N/A", "protocol": "TCP", "description": "NetBIOS (ne pas changer)", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "QNAP - SMB", "port_internal": "445", "port_external": "N/A", "protocol": "TCP", "description": "SMB/CIFS (ne pas changer)", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "QNAP - AFP", "port_internal": "548", "port_external": "50548", "protocol": "TCP", "description": "Apple Filing Protocol", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "QNAP - FTP", "port_internal": "21", "port_external": "50021", "protocol": "TCP", "description": "FTP", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "QNAP - FTPS", "port_internal": "990", "port_external": "50990", "protocol": "TCP", "description": "FTP over SSL", "category": "Administration", "icon_url": "", "is_active": False},
+            {"service": "IMM-2 HTTPS", "port_internal": "443", "port_external": "54443", "protocol": "TCP", "description": "IBM Integrated Management Module", "category": "Administration", "icon_url": "", "is_active": False},
+            
+            # VPN
+            {"service": "VPN - OpenVPN", "port_internal": "1194", "port_external": "49100", "protocol": "UDP", "description": "OpenVPN standard", "category": "VPN", "icon_url": "", "is_active": True},
+            {"service": "VPN - OCserv", "port_internal": "443", "port_external": "N/A", "protocol": "TCP", "description": "OpenVPN Connect (OCserv)", "category": "VPN", "icon_url": "", "is_active": False},
+            {"service": "VPN - WireGuard", "port_internal": "51820", "port_external": "49101", "protocol": "UDP", "description": "WireGuard standard", "category": "VPN", "icon_url": "", "is_active": True},
+            {"service": "VPN - IPSec", "port_internal": "500", "port_external": "N/A", "protocol": "UDP", "description": "IKE (ne pas changer)", "category": "VPN", "icon_url": "", "is_active": False},
+            {"service": "VPN - IPSec NAT-T", "port_internal": "4500", "port_external": "N/A", "protocol": "UDP", "description": "NAT-T (ne pas changer)", "category": "VPN", "icon_url": "", "is_active": False},
+            {"service": "VPN - L2TP", "port_internal": "1701", "port_external": "49102", "protocol": "UDP/TCP", "description": "L2TP", "category": "VPN", "icon_url": "", "is_active": False},
+            {"service": "VPN - PPTP", "port_internal": "1723", "port_external": "49103", "protocol": "TCP", "description": "PPTP (non recommandé)", "category": "VPN", "icon_url": "", "is_active": False},
             
             # Network
-            {"service": "Wake on LAN", "port_internal": "9", "port_external": "N/A", "protocol": "UDP", "description": "WOL Magic Packet (broadcast)", "category": "Network", "is_active": True},
+            {"service": "Wake on LAN", "port_internal": "7", "port_external": "N/A", "protocol": "UDP", "description": "WOL Magic Packet (alternative)", "category": "Network", "icon_url": "", "is_active": False},
+            {"service": "Wake on LAN", "port_internal": "9", "port_external": "N/A", "protocol": "UDP", "description": "WOL Magic Packet (standard)", "category": "Network", "icon_url": "", "is_active": True},
             
             # Home Automation
-            {"service": "Home Assistant", "port_internal": "8123", "port_external": "48123", "protocol": "TCP", "description": "Interface web Home Assistant", "category": "Home Automation", "is_active": True},
+            {"service": "Home Assistant", "port_internal": "8123", "port_external": "48123", "protocol": "TCP", "description": "Interface web Home Assistant", "category": "Home Automation", "icon_url": "", "is_active": True},
+            {"service": "Home Assistant - Secure", "port_internal": "8443", "port_external": "48443", "protocol": "TCP", "description": "HTTPS pour Home Assistant (optionnel)", "category": "Home Automation", "icon_url": "", "is_active": False},
         ]
         
         for port_data in default_ports:

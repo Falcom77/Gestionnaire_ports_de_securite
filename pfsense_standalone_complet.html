@@ -29,6 +29,15 @@
         table { table-layout: fixed; width: 100%; }
         th { cursor: pointer; user-select: none; }
         th:hover { background-color: rgba(0,0,0,0.05); }
+        .action-btn {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body class="min-h-screen transition-colors duration-300 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -49,7 +58,7 @@ let state = {
     sortConfig: { key: null, direction: 'asc' }
 };
 
-// Icônes SVG simplifiées
+// Icônes SVG
 const icons = {
     shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>',
@@ -175,7 +184,7 @@ function render() {
                             <span class="${isDark ? 'text-blue-400' : 'text-blue-600'} w-8 h-8">${icons.shield}</span>
                             Gestionnaire de Ports pfSense
                         </h1>
-                        <p class="${isDark ? 'text-gray-400' : 'text-gray-600'} mt-1">Configuration et gestion des règles de pare-feu - Version Standalone</p>
+                        <p class="${isDark ? 'text-gray-400' : 'text-gray-600'} mt-1">Version Standalone - Tous les boutons visibles et agrandis</p>
                     </div>
                     <div class="flex gap-3 flex-wrap">
                         <button onclick="toggleTheme()" class="${isDark ? 'bg-gray-700 hover:bg-gray-600 text-yellow-400' : 'bg-gray-800 hover:bg-gray-700 text-yellow-300'} p-3 rounded-lg transition-all shadow-lg">
@@ -252,6 +261,7 @@ function renderPortsTab(groupedPorts, isDark) {
                                     <th class="${isDark ? 'text-gray-300' : 'text-gray-700'} px-2 py-3 text-left text-xs font-medium uppercase tracking-wider" style="width:220px">Description</th>
                                     <th class="${isDark ? 'text-gray-300' : 'text-gray-700'} px-2 py-3 text-left text-xs font-medium uppercase tracking-wider" style="width:130px">Destination</th>
                                     <th class="${isDark ? 'text-gray-300' : 'text-gray-700'} px-2 py-3 text-left text-xs font-medium uppercase tracking-wider" style="width:140px">IP</th>
+                                    <th class="${isDark ? 'text-gray-300' : 'text-gray-700'} px-2 py-3 text-center text-xs font-medium uppercase tracking-wider" style="width:100px">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="${isDark ? 'divide-gray-700' : 'divide-gray-200'} divide-y">
@@ -275,6 +285,16 @@ function renderPortsTab(groupedPorts, isDark) {
                                         <td class="${isDark ? 'text-gray-300' : 'text-gray-700'} px-2 py-3 text-sm truncate">${port.description}</td>
                                         <td class="${isDark ? 'text-gray-400' : 'text-gray-600'} px-2 py-3 text-sm truncate">${port.destination || '-'}</td>
                                         <td class="${isDark ? 'text-gray-400' : 'text-gray-600'} px-2 py-3 text-sm truncate">${port.ip_address || '-'}</td>
+                                        <td class="px-2 py-3">
+                                            <div class="flex gap-2 justify-center">
+                                                <button class="action-btn ${isDark ? 'bg-blue-500/20 text-blue-400 hover:bg-blue-500/30' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'}" title="Modifier (lecture seule)">
+                                                    <span class="w-6 h-6">${icons.edit}</span>
+                                                </button>
+                                                <button class="action-btn ${isDark ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30' : 'bg-red-100 text-red-700 hover:bg-red-200'}" title="Supprimer (lecture seule)">
+                                                    <span class="w-6 h-6">${icons.trash}</span>
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -315,12 +335,13 @@ function renderDevicesTab(sortedDevices, isDark) {
                             <th onclick="handleSort('description')" class="${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-200'} px-4 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors" style="min-width:200px">
                                 Description${sortIcon('description')}
                             </th>
+                            <th class="${isDark ? 'text-gray-300' : 'text-gray-700'} px-4 py-3 text-center text-xs font-medium uppercase tracking-wider" style="width:140px">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="${isDark ? 'divide-gray-700' : 'divide-gray-200'} divide-y">
                         ${sortedDevices.length === 0 ? `
                             <tr>
-                                <td colspan="5" class="${isDark ? 'text-gray-400' : 'text-gray-600'} px-4 py-8 text-center">
+                                <td colspan="6" class="${isDark ? 'text-gray-400' : 'text-gray-600'} px-4 py-8 text-center">
                                     Aucun périphérique enregistré.
                                 </td>
                             </tr>
@@ -335,6 +356,16 @@ function renderDevicesTab(sortedDevices, isDark) {
                                     <span class="${isDark ? 'bg-purple-500/20 text-purple-300' : 'bg-purple-100 text-purple-800'} px-2 py-1 rounded text-xs font-semibold">${device.device_type}</span>
                                 </td>
                                 <td class="${isDark ? 'text-gray-400' : 'text-gray-600'} px-4 py-3 text-sm">${device.description || '-'}</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex gap-2 justify-center">
+                                        <button class="action-btn ${isDark ? 'bg-blue-500/20 text-blue-400 hover:bg-blue-500/30' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'}" title="Modifier (lecture seule)">
+                                            <span class="w-6 h-6">${icons.edit}</span>
+                                        </button>
+                                        <button class="action-btn ${isDark ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30' : 'bg-red-100 text-red-700 hover:bg-red-200'}" title="Supprimer (lecture seule)">
+                                            <span class="w-6 h-6">${icons.trash}</span>
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         `).join('')}
                     </tbody>

@@ -475,39 +475,39 @@ function App() {
                           }`}
                           data-testid={`port-row-${port.id}`}
                         >
-                          <td className="px-3 py-3">
+                          <td className="px-2 py-3">
                             <button
                               onClick={() => togglePortStatus(port.id, port.is_active)}
-                              className={`w-16 h-8 rounded-full transition-all shadow-inner ${
+                              className={`w-14 h-7 rounded-full transition-all shadow-inner ${
                                 port.is_active 
                                   ? 'bg-green-500 hover:bg-green-600' 
                                   : 'bg-red-500 hover:bg-red-600'
                               }`}
                               data-testid={`toggle-status-${port.id}`}
                             >
-                              <div className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${
-                                port.is_active ? 'translate-x-9' : 'translate-x-1'
+                              <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
+                                port.is_active ? 'translate-x-7' : 'translate-x-1'
                               }`} />
                             </button>
                           </td>
-                          <td className="px-3 py-3">
+                          <td className="px-2 py-3">
                             {port.icon_url ? (
-                              <img src={port.icon_url} alt={port.service} className="w-8 h-8 rounded object-cover" onError={(e) => e.target.style.display = 'none'} />
+                              <img src={port.icon_url} alt={port.service} className="w-7 h-7 rounded object-cover" onError={(e) => e.target.style.display = 'none'} />
                             ) : (
-                              <div className={`w-8 h-8 rounded flex items-center justify-center text-xs font-bold ${darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-200 text-gray-500'}`}>
+                              <div className={`w-7 h-7 rounded flex items-center justify-center text-xs font-bold ${darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-200 text-gray-500'}`}>
                                 {port.service.charAt(0)}
                               </div>
                             )}
                           </td>
-                          <td className={`px-3 py-3 font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.service}</td>
-                          <td className="px-3 py-3">
-                            <code className={`px-2 py-1 rounded text-xs ${darkMode ? 'text-blue-400 bg-gray-900/50' : 'text-blue-600 bg-blue-50'}`}>{port.port_internal}</code>
+                          <td className={`px-2 py-3 font-medium text-sm ${darkMode ? 'text-white' : 'text-gray-900'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.service}</td>
+                          <td className="px-2 py-3">
+                            <code className={`px-1 py-1 rounded text-xs ${darkMode ? 'text-blue-400 bg-gray-900/50' : 'text-blue-600 bg-blue-50'}`}>{port.port_internal}</code>
                           </td>
-                          <td className="px-3 py-3">
-                            <code className={`px-2 py-1 rounded text-xs ${darkMode ? 'text-purple-400 bg-gray-900/50' : 'text-purple-600 bg-purple-50'}`}>{port.port_external}</code>
+                          <td className="px-2 py-3">
+                            <code className={`px-1 py-1 rounded text-xs ${darkMode ? 'text-purple-400 bg-gray-900/50' : 'text-purple-600 bg-purple-50'}`}>{port.port_external}</code>
                           </td>
-                          <td className="px-3 py-3">
-                            <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                          <td className="px-2 py-3">
+                            <span className={`px-1 py-1 rounded text-xs font-semibold ${
                               port.protocol.includes('TCP') && port.protocol.includes('UDP')
                                 ? darkMode ? 'bg-yellow-500/20 text-yellow-300' : 'bg-yellow-100 text-yellow-800'
                                 : port.protocol.includes('TCP')
@@ -517,10 +517,10 @@ function App() {
                               {port.protocol}
                             </span>
                           </td>
-                          <td className={`px-3 py-3 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.description}</td>
-                          <td className={`px-3 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.destination || '-'}</td>
-                          <td className={`px-3 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.ip_address || '-'}</td>
-                          <td className="px-3 py-3">
+                          <td className={`px-2 py-3 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.description}</td>
+                          <td className={`px-2 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.destination || '-'}</td>
+                          <td className={`px-2 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{port.ip_address || '-'}</td>
+                          <td className="px-2 py-3">
                             <div className="flex gap-2">
                               <button
                                 onClick={() => handleEdit(port)}

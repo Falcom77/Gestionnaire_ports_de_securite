@@ -107,63 +107,78 @@ user_problem_statement: "Test de l'application pfSense - Gestionnaire de Ports a
 frontend:
   - task: "Main page ports tab functionality"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "testing"
         comment: "Initial testing - need to verify page loads, no horizontal scroll, all columns visible, rules grouped by categories, toggle functionality, Add Port button"
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Page loads correctly with title 'Gestionnaire de Ports pfSense', all 10 required columns visible (État, Icône, Service, Port Interne, Port Externe, Protocole, Description, Destination, IP, Actions), rules properly grouped by categories (found 9 category groups), toggle functionality works (67 toggle buttons found and tested), Add Port button opens modal successfully"
 
   - task: "Parc Informatique tab functionality"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "testing"
         comment: "Initial testing - need to verify column order, sorting by Hostname and IP, Add Device button"
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Tab switches correctly, all 6 columns in correct order (Hostname, Adresse IP/Masque, Adresse MAC, Type, Description, Actions), sorting by Hostname works with ↑ indicator, sorting by IP works with ↑ indicator, Add Device button opens modal successfully"
 
   - task: "Export functionality"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "testing"
         comment: "Initial testing - need to verify Export Complet downloads .xlsx file with correct name"
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Export Complet button found and functional, downloads file with correct name 'pfsense_export_complet.xlsx' and correct .xlsx extension (not .zip as was a concern)"
 
   - task: "Theme toggle functionality"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "testing"
         comment: "Initial testing - need to verify dark/light mode toggle works correctly"
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Theme toggle button found and functional, successfully changes HTML classes from 'dark' to empty (light mode), visual theme change confirmed"
 
   - task: "Responsive design"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "testing"
         comment: "Initial testing - need to verify 1920x1080 display without horizontal scroll"
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - No horizontal scroll detected at 1920x1080 resolution (page width: 1920px = viewport width: 1920px), all content fits properly within viewport"
 
 metadata:
   created_by: "testing_agent"

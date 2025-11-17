@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { 
-  Plus, Edit, Trash2, Download, Save, X, Moon, Sun, FolderPlus, Server
+  Plus, Edit, Trash2, Download, Save, X, Moon, Sun, FolderPlus, Server, Shield
 } from "lucide-react";
 import { categoryIcons, categoryColors, API } from "./constants";
 import { sortArray } from "./utils/sortUtils";

@@ -430,7 +430,7 @@ function App() {
           
           return (
             <div key={category} className="mb-8" data-testid={`category-${category.toLowerCase().replace(/\s+/g, '-')}`}>
-              <div className={`bg-gradient-to-r ${gradient} rounded-lg p-4 mb-4 shadow-xl`}>
+              <div className={`bg-gradient-to-r ${gradient} rounded-lg p-4 mb-4 shadow-xl flex justify-between items-center`}>
                 <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                   <Icon className="w-7 h-7" />
                   {category}
@@ -438,6 +438,13 @@ function App() {
                     ({groupedPorts[category].length} règles)
                   </span>
                 </h2>
+                <button
+                  onClick={() => handleDeleteCategory(category)}
+                  className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg transition-all shadow-lg"
+                  title="Supprimer la catégorie"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
               </div>
 
               <div className={`backdrop-blur-lg rounded-lg shadow-xl overflow-hidden border ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-white/80 border-gray-200'}`}>

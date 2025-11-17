@@ -804,20 +804,26 @@ function App() {
 
                 <div>
                   <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Destination (VM/PC)
+                    Destination (Hostname)
                   </label>
-                  <input
-                    type="text"
+                  <select
                     value={formData.destination}
                     onChange={(e) => setFormData({...formData, destination: e.target.value})}
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       darkMode 
-                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
-                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                        ? 'bg-gray-900 border-gray-700 text-white' 
+                        : 'bg-white border-gray-300 text-gray-900'
                     }`}
-                    placeholder="VM-Ubuntu-01"
-                    data-testid="input-destination"
-                  />
+                    data-testid="select-destination"
+                  >
+                    <option value="">-- Sélectionner un périphérique --</option>
+                    {devices.map(device => (
+                      <option key={device.id} value={device.hostname}>{device.hostname}</option>
+                    ))}
+                  </select>
+                  <p className={`text-xs mt-1 ${darkMode ? 'text-gray-500' : 'text-gray-600'}`}>
+                    Ou ajoutez un périphérique dans l'onglet "Parc Informatique"
+                  </p>
                 </div>
 
                 <div>

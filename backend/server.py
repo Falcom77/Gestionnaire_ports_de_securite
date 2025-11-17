@@ -57,6 +57,7 @@ class PortRuleCreate(BaseModel):
     destination: Optional[str] = ""
     ip_address: Optional[str] = ""
     mac_address: Optional[str] = ""
+    icon_url: Optional[str] = ""
     is_active: Optional[bool] = True
 
 class PortRuleUpdate(BaseModel):

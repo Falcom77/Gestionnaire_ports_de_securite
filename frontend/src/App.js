@@ -117,6 +117,7 @@ function App() {
       destination: port.destination || "",
       ip_address: port.ip_address || "",
       mac_address: port.mac_address || "",
+      icon_url: port.icon_url || "",
       is_active: port.is_active
     });
     setShowModal(true);

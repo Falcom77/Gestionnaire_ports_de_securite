@@ -110,9 +110,10 @@ async def init_default_ports():
             {"service": "Alloy (Grafana)", "port_internal": "12345", "port_external": "42345", "protocol": "TCP", "description": "Grafana Alloy", "category": "Monitoring", "icon_url": "https://grafana.com/static/img/logos/logo-alloy.svg", "is_active": False},
             
             # Database
-            {"service": "InfluxDB - API", "port_internal": "8086", "port_external": "33200", "protocol": "TCP", "description": "InfluxDB HTTP API", "category": "Database", "is_active": True},
-            {"service": "PostgreSQL", "port_internal": "5432", "port_external": "35432", "protocol": "TCP", "description": "Base de données PostgreSQL", "category": "Database", "is_active": True},
-            {"service": "MySQL", "port_internal": "3306", "port_external": "33060", "protocol": "TCP", "description": "Base de données MySQL", "category": "Database", "is_active": False},
+            {"service": "InfluxDB - API", "port_internal": "8086", "port_external": "33200", "protocol": "TCP", "description": "InfluxDB HTTP API", "category": "Database", "icon_url": "", "is_active": True},
+            {"service": "InfluxDB - RPC", "port_internal": "8088", "port_external": "33201", "protocol": "TCP", "description": "InfluxDB RPC", "category": "Database", "icon_url": "", "is_active": False},
+            {"service": "PostgreSQL", "port_internal": "5432", "port_external": "35432", "protocol": "TCP", "description": "Base de données PostgreSQL", "category": "Database", "icon_url": "", "is_active": True},
+            {"service": "MySQL", "port_internal": "3306", "port_external": "33060", "protocol": "TCP", "description": "Base de données MySQL", "category": "Database", "icon_url": "", "is_active": False},
             
             # Infrastructure
             {"service": "Kubernetes - API Server", "port_internal": "6443", "port_external": "36443", "protocol": "TCP", "description": "Kubernetes API", "category": "Infrastructure", "icon_url": "https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg", "is_active": True},

@@ -389,11 +389,70 @@ function App() {
         })}
       </main>
 
-      {/* Modal */}
+      {/* Modal Catégorie */}
+      {showCategoryModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className={`rounded-lg shadow-2xl max-w-md w-full border ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+            <div className="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4 flex justify-between items-center">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                <FolderPlus className="w-6 h-6" />
+                Nouvelle Catégorie
+              </h3>
+              <button
+                onClick={() => setShowCategoryModal(false)}
+                className="text-white hover:bg-white/20 rounded-lg p-1 transition-all"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="p-6">
+              <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                Nom de la catégorie
+              </label>
+              <input
+                type="text"
+                value={newCategory}
+                onChange={(e) => setNewCategory(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleAddCategory()}
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                  darkMode 
+                    ? 'bg-gray-900 border-gray-700 text-white' 
+                    : 'bg-white border-gray-300 text-gray-900'
+                }`}
+                placeholder="Ex: Serveurs de jeux"
+                autoFocus
+                data-testid="input-new-category"
+              />
+              <div className="mt-6 flex gap-3">
+                <button
+                  onClick={handleAddCategory}
+                  disabled={!newCategory.trim()}
+                  className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg"
+                  data-testid="confirm-add-category"
+                >
+                  Créer
+                </button>
+                <button
+                  onClick={() => setShowCategoryModal(false)}
+                  className={`px-6 py-3 rounded-lg transition-all ${
+                    darkMode 
+                      ? 'bg-gray-700 hover:bg-gray-600 text-white' 
+                      : 'bg-gray-200 hover:bg-gray-300 text-gray-900'
+                  }`}
+                >
+                  Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Formulaire */}
       {showModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-4 flex justify-between items-center">
+          <div className={`rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+            <div className="bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-4 flex justify-between items-center sticky top-0 z-10">
               <h3 className="text-xl font-bold text-white">
                 {editingPort ? 'Modifier la règle' : 'Ajouter une règle'}
               </h3>

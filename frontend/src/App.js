@@ -228,6 +228,83 @@ function App() {
     }
   };
 
+  const handleDeleteCategory = async (categoryName) => {
+    if (window.confirm(`Êtes-vous sûr de vouloir supprimer la catégorie "${categoryName}" et toutes ses règles ?`)) {
+      try {
+        await axios.delete(`${API}/categories/${categoryName}`);
+        fetchPorts();
+        fetchCategories();
+      } catch (error) {
+        console.error("Error deleting category:", error);
+      }
+    }
+  };
+
+  const handleEditDevice = (device) => {
+    setEditingDevice(device);
+    setDeviceFormData({
+      hostname: device.hostname,
+      ip_address: device.ip_address,
+      mac_address: device.mac_address || "",
+      device_type: device.device_type,
+      description: device.description || ""
+    });
+    setShowDeviceModal(true);
+  };
+
+  const handleDeleteDevice = async (deviceId) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce périphérique ?")) {
+      try {
+        await axios.delete(`${API}/devices/${deviceId}`);
+        fetchDevices();
+      } catch (error) {
+        console.error("Error deleting device:", error);
+      }
+    }
+  };
+
+  const handleDeviceSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (editingDevice) {
+        await axios.put(`${API}/devices/${editingDevice.id}`, deviceFormData);
+      } else {
+        await axios.post(`${API}/devices`, deviceFormData);
+      }
+      fetchDevices();
+      closeDeviceModal();
+    } catch (error) {
+      console.error("Error saving device:", error);
+    }
+  };
+
+  const closeDeviceModal = () => {
+    setShowDeviceModal(false);
+    setEditingDevice(null);
+    setDeviceFormData({
+      hostname: "",
+      ip_address: "",
+      mac_address: "",
+      device_type: "PC",
+      description: ""
+    });
+  };
+
+  const exportFullCSV = async () => {
+    try {
+      const response = await axios.get(`${API}/export/csv-full`, { responseType: 'blob' });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'pfsense_export_complet.zip');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error("Error exporting full CSV:", error);
+    }
+  };
+
   const groupedPorts = ports.reduce((acc, port) => {
     if (!acc[port.category]) {
       acc[port.category] = [];

@@ -324,7 +324,7 @@ function App() {
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-50 via-gray-100 to-blue-50'}`}>
       {/* Header */}
-      <header className={`backdrop-blur-lg border-b sticky top-0 z-40 ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-white/80 border-gray-200'}`}>
+      <header className={`backdrop-blur-lg border-b sticky top-0 z-40 ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-gray-50/90 border-gray-300'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>

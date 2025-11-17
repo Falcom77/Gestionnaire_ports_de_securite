@@ -547,6 +547,84 @@ function App() {
             </div>
           );
         })}
+
+        {/* Devices Tab */}
+        {activeTab === 'devices' && (
+          <div className={`backdrop-blur-lg rounded-lg shadow-xl overflow-hidden border ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-white/80 border-gray-200'}`}>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className={darkMode ? 'bg-gray-900/50' : 'bg-gray-100'}>
+                  <tr>
+                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '200px'}}>Hostname</th>
+                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '180px'}}>Adresse IP/Masque</th>
+                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '160px'}}>Adresse MAC</th>
+                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '150px'}}>Type</th>
+                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{minWidth: '200px'}}>Description</th>
+                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '100px'}}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
+                  {devices.length === 0 ? (
+                    <tr>
+                      <td colSpan="6" className={`px-4 py-8 text-center ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        Aucun périphérique enregistré. Cliquez sur "Ajouter Périphérique" pour commencer.
+                      </td>
+                    </tr>
+                  ) : (
+                    devices.map((device, idx) => (
+                      <tr 
+                        key={device.id} 
+                        className={`transition-colors ${
+                          darkMode 
+                            ? `hover:bg-gray-700/50 ${idx % 2 === 0 ? 'bg-gray-800/30' : 'bg-gray-800/10'}` 
+                            : `hover:bg-gray-50 ${idx % 2 === 0 ? 'bg-gray-50/50' : 'bg-white'}`
+                        }`}
+                      >
+                        <td className={`px-4 py-3 font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                          {device.hostname}
+                        </td>
+                        <td className="px-4 py-3">
+                          <code className={`px-2 py-1 rounded ${darkMode ? 'text-blue-400 bg-gray-900/50' : 'text-blue-600 bg-blue-50'}`}>
+                            {device.ip_address}
+                          </code>
+                        </td>
+                        <td className={`px-4 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                          {device.mac_address || '-'}
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                            darkMode ? 'bg-purple-500/20 text-purple-300' : 'bg-purple-100 text-purple-800'
+                          }`}>
+                            {device.device_type}
+                          </span>
+                        </td>
+                        <td className={`px-4 py-3 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                          {device.description || '-'}
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => handleEditDevice(device)}
+                              className={`p-1 rounded transition-all ${darkMode ? 'text-blue-400 hover:text-blue-300 hover:bg-blue-500/10' : 'text-blue-600 hover:text-blue-700 hover:bg-blue-100'}`}
+                            >
+                              <Edit className="w-5 h-5" />
+                            </button>
+                            <button
+                              onClick={() => handleDeleteDevice(device.id)}
+                              className={`p-1 rounded transition-all ${darkMode ? 'text-red-400 hover:text-red-300 hover:bg-red-500/10' : 'text-red-600 hover:text-red-700 hover:bg-red-100'}`}
+                            >
+                              <Trash2 className="w-5 h-5" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </main>
 
       {/* Modal Catégorie */}

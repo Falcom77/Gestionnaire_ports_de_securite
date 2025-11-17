@@ -359,7 +359,7 @@ function App() {
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : ''}`} style={!darkMode ? {background: 'linear-gradient(135deg, #e5e7eb 0%, #d1d5db 50%, #cbd5e1 100%)'} : {}}>
       {/* Header */}
       <header className={`backdrop-blur-lg border-b sticky top-0 z-40 ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-gray-200/90 border-gray-400'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-full mx-auto px-2 py-6">
           <div className="flex justify-between items-center">
             <div>
               <h1 className={`text-3xl font-bold flex items-center gap-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>

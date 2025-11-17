@@ -118,6 +118,39 @@ function App() {
     }
   };
 
+  const handleSort = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedDevices = [...devices].sort((a, b) => {
+    if (!sortConfig.key) return 0;
+    
+    let aValue = a[sortConfig.key];
+    let bValue = b[sortConfig.key];
+    
+    // Handle IP address sorting specially
+    if (sortConfig.key === 'ip_address') {
+      const ipToNum = (ip) => {
+        const parts = ip.split('/')[0].split('.');
+        return parts.reduce((acc, octet, idx) => acc + (parseInt(octet) || 0) * Math.pow(256, 3 - idx), 0);
+      };
+      aValue = ipToNum(aValue || '0.0.0.0');
+      bValue = ipToNum(bValue || '0.0.0.0');
+    } else {
+      aValue = String(aValue || '').toLowerCase();
+      bValue = String(bValue || '').toLowerCase();
+    }
+    
+    if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+    if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+
   const togglePortStatus = async (portId, currentStatus) => {
     try {
       await axios.put(`${API}/ports/${portId}`, { is_active: !currentStatus });

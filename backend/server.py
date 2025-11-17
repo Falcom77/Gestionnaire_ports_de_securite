@@ -74,6 +74,33 @@ class PortRuleUpdate(BaseModel):
     is_active: Optional[bool] = None
 
 
+# Device Models
+class Device(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    hostname: str
+    ip_address: str  # Format: 192.168.1.100/24
+    mac_address: str = ""
+    device_type: str  # PC, VM, Raspberry Pi, etc.
+    description: str = ""
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class DeviceCreate(BaseModel):
+    hostname: str
+    ip_address: str
+    mac_address: Optional[str] = ""
+    device_type: str
+    description: Optional[str] = ""
+
+class DeviceUpdate(BaseModel):
+    hostname: Optional[str] = None
+    ip_address: Optional[str] = None
+    mac_address: Optional[str] = None
+    device_type: Optional[str] = None
+    description: Optional[str] = None
+
+
 # Initialize database with default data from CSV
 async def init_default_ports():
     count = await db.port_rules.count_documents({})

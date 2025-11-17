@@ -380,61 +380,72 @@ async def delete_category(category_name: str):
 
 @api_router.get("/export/csv-full")
 async def export_csv_full():
-    """Export both ports and devices to separate CSV files in a ZIP"""
-    import zipfile
+    """Export both ports and devices to a single XLSX file with multiple sheets"""
     from io import BytesIO
+    from openpyxl import Workbook
     
     # Get data
     ports = await db.port_rules.find({}, {"_id": 0}).to_list(1000)
     devices = await db.devices.find({}, {"_id": 0}).to_list(1000)
     
-    # Create ZIP file in memory
-    zip_buffer = BytesIO()
+    # Create Excel workbook
+    wb = Workbook()
     
-    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-        # Ports CSV
-        ports_csv = io.StringIO()
-        writer = csv.writer(ports_csv, delimiter=';')
-        writer.writerow([
-            "Service/Application", "Port(s) Interne", "Port(s) Externe", 
-            "Protocole", "Description", "Destination (VM/PC)", 
-            "Adresse IP", "Adresse MAC", "Actif"
-        ])
-        for port in ports:
-            writer.writerow([
-                port.get('service', ''),
-                port.get('port_internal', ''),
-                port.get('port_external', ''),
-                port.get('protocol', ''),
-                port.get('description', ''),
-                port.get('destination', ''),
-                port.get('ip_address', ''),
-                port.get('mac_address', ''),
-                'Oui' if port.get('is_active') else 'Non'
-            ])
-        zip_file.writestr('pfsense_ports.csv', ports_csv.getvalue())
-        
-        # Devices CSV
-        devices_csv = io.StringIO()
-        writer = csv.writer(devices_csv, delimiter=';')
-        writer.writerow([
-            "Hostname", "Adresse IP", "Adresse MAC", "Type de Périphérique", "Description"
-        ])
-        for device in devices:
-            writer.writerow([
-                device.get('hostname', ''),
-                device.get('ip_address', ''),
-                device.get('mac_address', ''),
-                device.get('device_type', ''),
-                device.get('description', '')
-            ])
-        zip_file.writestr('parc_informatique.csv', devices_csv.getvalue())
+    # Sheet 1: Ports
+    ws_ports = wb.active
+    ws_ports.title = "Règles de Ports"
     
-    zip_buffer.seek(0)
+    # Ports headers
+    ports_headers = [
+        "Service/Application", "Port(s) Interne", "Port(s) Externe", 
+        "Protocole", "Description", "Catégorie", "Destination (VM/PC)", 
+        "Adresse IP", "Adresse MAC", "Actif"
+    ]
+    ws_ports.append(ports_headers)
+    
+    # Ports data
+    for port in ports:
+        ws_ports.append([
+            port.get('service', ''),
+            port.get('port_internal', ''),
+            port.get('port_external', ''),
+            port.get('protocol', ''),
+            port.get('description', ''),
+            port.get('category', ''),
+            port.get('destination', ''),
+            port.get('ip_address', ''),
+            port.get('mac_address', ''),
+            'Oui' if port.get('is_active') else 'Non'
+        ])
+    
+    # Sheet 2: Devices
+    ws_devices = wb.create_sheet(title="Parc Informatique")
+    
+    # Devices headers
+    devices_headers = [
+        "Hostname", "Adresse IP/Masque", "Adresse MAC", "Type de Périphérique", "Description"
+    ]
+    ws_devices.append(devices_headers)
+    
+    # Devices data
+    for device in devices:
+        ws_devices.append([
+            device.get('hostname', ''),
+            device.get('ip_address', ''),
+            device.get('mac_address', ''),
+            device.get('device_type', ''),
+            device.get('description', '')
+        ])
+    
+    # Save to BytesIO
+    excel_buffer = BytesIO()
+    wb.save(excel_buffer)
+    excel_buffer.seek(0)
+    
     return StreamingResponse(
-        iter([zip_buffer.getvalue()]),
-        media_type="application/zip",
-        headers={"Content-Disposition": "attachment; filename=pfsense_export_complet.zip"}
+        iter([excel_buffer.getvalue()]),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": "attachment; filename=pfsense_export_complet.xlsx"}
     )
 
 

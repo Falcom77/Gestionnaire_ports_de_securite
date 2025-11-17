@@ -102,12 +102,12 @@ async def init_default_ports():
             {"service": "VPN - IPSec", "port_internal": "4500", "port_external": "N/A", "protocol": "UDP", "description": "NAT-T (ne pas changer)", "category": "VPN", "is_active": False},
             
             # Monitoring
-            {"service": "Grafana", "port_internal": "3000", "port_external": "33100", "protocol": "TCP", "description": "Interface web Grafana", "category": "Monitoring", "is_active": True},
-            {"service": "Prometheus", "port_internal": "9090", "port_external": "39090", "protocol": "TCP", "description": "Prometheus metrics & UI", "category": "Monitoring", "is_active": True},
-            {"service": "Loki", "port_internal": "3100", "port_external": "43100", "protocol": "TCP", "description": "Loki logs ingestion", "category": "Monitoring", "is_active": True},
-            {"service": "Tempo - HTTP", "port_internal": "3200", "port_external": "43200", "protocol": "TCP", "description": "Tempo traces HTTP", "category": "Monitoring", "is_active": True},
-            {"service": "Mimir - HTTP", "port_internal": "8080", "port_external": "38080", "protocol": "TCP", "description": "Mimir metrics HTTP", "category": "Monitoring", "is_active": True},
-            {"service": "Alloy (Grafana)", "port_internal": "12345", "port_external": "42345", "protocol": "TCP", "description": "Grafana Alloy", "category": "Monitoring", "is_active": False},
+            {"service": "Grafana", "port_internal": "3000", "port_external": "33100", "protocol": "TCP", "description": "Interface web Grafana", "category": "Monitoring", "icon_url": "https://raw.githubusercontent.com/grafana/grafana/main/public/img/grafana_icon.svg", "is_active": True},
+            {"service": "Prometheus", "port_internal": "9090", "port_external": "39090", "protocol": "TCP", "description": "Prometheus metrics & UI", "category": "Monitoring", "icon_url": "https://raw.githubusercontent.com/prometheus/prometheus/main/web/ui/static/img/prometheus_logo.svg", "is_active": True},
+            {"service": "Loki", "port_internal": "3100", "port_external": "43100", "protocol": "TCP", "description": "Loki logs ingestion", "category": "Monitoring", "icon_url": "https://grafana.com/static/img/logos/logo-loki.svg", "is_active": True},
+            {"service": "Tempo", "port_internal": "3200", "port_external": "43200", "protocol": "TCP", "description": "Tempo traces HTTP", "category": "Monitoring", "icon_url": "https://grafana.com/static/img/logos/logo-tempo.svg", "is_active": True},
+            {"service": "Mimir - HTTP", "port_internal": "8080", "port_external": "38080", "protocol": "TCP", "description": "Mimir metrics HTTP", "category": "Monitoring", "icon_url": "https://grafana.com/static/img/logos/logo-mimir.svg", "is_active": True},
+            {"service": "Alloy (Grafana)", "port_internal": "12345", "port_external": "42345", "protocol": "TCP", "description": "Grafana Alloy", "category": "Monitoring", "icon_url": "https://grafana.com/static/img/logos/logo-alloy.svg", "is_active": False},
             
             # Database
             {"service": "InfluxDB - API", "port_internal": "8086", "port_external": "33200", "protocol": "TCP", "description": "InfluxDB HTTP API", "category": "Database", "is_active": True},

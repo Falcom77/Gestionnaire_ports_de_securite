@@ -447,7 +447,7 @@ function App() {
                 </button>
               </div>
 
-              <div className={`backdrop-blur-lg rounded-lg shadow-xl overflow-hidden border ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-gray-50/90 border-gray-300'}`}>
+              <div className={`backdrop-blur-lg rounded-lg shadow-xl overflow-hidden border ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-gray-200/90 border-gray-400'}`}>
                 <div className="overflow-x-auto">
                   <table className="w-full" style={{tableLayout: 'fixed'}}>
                     <thead className={darkMode ? 'bg-gray-900/50' : 'bg-gray-100'}>

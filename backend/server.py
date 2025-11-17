@@ -117,6 +117,10 @@ async def init_default_ports():
             
             # Infrastructure
             {"service": "Kubernetes - API Server", "port_internal": "6443", "port_external": "36443", "protocol": "TCP", "description": "Kubernetes API", "category": "Infrastructure", "icon_url": "https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg", "is_active": True},
+            {"service": "Kubernetes - Kubelet", "port_internal": "10250", "port_external": "40250", "protocol": "TCP", "description": "Kubelet API", "category": "Infrastructure", "icon_url": "", "is_active": False},
+            {"service": "Kubernetes - etcd", "port_internal": "2379", "port_external": "32379", "protocol": "TCP", "description": "etcd client", "category": "Infrastructure", "icon_url": "", "is_active": False},
+            {"service": "Kubernetes - etcd peer", "port_internal": "2380", "port_external": "32380", "protocol": "TCP", "description": "etcd peer communication", "category": "Infrastructure", "icon_url": "", "is_active": False},
+            {"service": "Kubernetes - NodePort", "port_internal": "30000-32767", "port_external": "N/A", "protocol": "TCP/UDP", "description": "Service NodePort range", "category": "Infrastructure", "icon_url": "", "is_active": False},
             {"service": "OpenTelemetry - gRPC", "port_internal": "4317", "port_external": "34317", "protocol": "TCP", "description": "OTLP gRPC receiver", "category": "Infrastructure", "icon_url": "https://opentelemetry.io/img/logos/opentelemetry-horizontal-color.svg", "is_active": True},
             {"service": "OpenTelemetry - HTTP", "port_internal": "4318", "port_external": "34318", "protocol": "TCP", "description": "OTLP HTTP receiver", "category": "Infrastructure", "icon_url": "https://opentelemetry.io/img/logos/opentelemetry-horizontal-color.svg", "is_active": True},
             

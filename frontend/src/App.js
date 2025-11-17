@@ -4,6 +4,7 @@ import {
   Plus, Edit, Trash2, Download, Save, X, Moon, Sun, FolderPlus, Server
 } from "lucide-react";
 import { categoryIcons, categoryColors, API } from "./constants";
+import { sortArray } from "./utils/sortUtils";
 
 function App() {
   const [ports, setPorts] = useState([]);

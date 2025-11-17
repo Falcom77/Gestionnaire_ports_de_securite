@@ -315,14 +315,14 @@ function App() {
 
   if (loading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-50 via-gray-100 to-blue-50'}`}>
+      <div className={`min-h-screen flex items-center justify-center ${darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-100 via-gray-150 to-gray-200'}`} style={!darkMode ? {background: 'linear-gradient(135deg, #e5e7eb 0%, #d1d5db 50%, #cbd5e1 100%)'} : {}}>
         <div className={`text-2xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Chargement...</div>
       </div>
     );
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-gradient-to-br from-gray-50 via-gray-100 to-blue-50'}`}>
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : ''}`} style={!darkMode ? {background: 'linear-gradient(135deg, #e5e7eb 0%, #d1d5db 50%, #cbd5e1 100%)'} : {}}>
       {/* Header */}
       <header className={`backdrop-blur-lg border-b sticky top-0 z-40 ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-gray-50/90 border-gray-300'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

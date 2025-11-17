@@ -297,27 +297,31 @@ function App() {
                 </h2>
               </div>
 
-              <div className="bg-gray-800/50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden border border-gray-700">
+              <div className={`backdrop-blur-lg rounded-lg shadow-xl overflow-hidden border ${darkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-white/80 border-gray-200'}`}>
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead className="bg-gray-900/50">
+                    <thead className={darkMode ? 'bg-gray-900/50' : 'bg-gray-100'}>
                       <tr>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">État</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Service</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Port Interne</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Port Externe</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Protocole</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Description</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Destination</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">IP</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
+                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>État</th>
+                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Service</th>
+                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Port Interne</th>
+                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Port Externe</th>
+                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Protocole</th>
+                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Description</th>
+                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Destination</th>
+                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>IP</th>
+                        <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-700">
+                    <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
                       {groupedPorts[category].map((port, idx) => (
                         <tr 
                           key={port.id} 
-                          className={`hover:bg-gray-700/50 transition-colors ${idx % 2 === 0 ? 'bg-gray-800/30' : 'bg-gray-800/10'}`}
+                          className={`transition-colors ${
+                            darkMode 
+                              ? `hover:bg-gray-700/50 ${idx % 2 === 0 ? 'bg-gray-800/30' : 'bg-gray-800/10'}` 
+                              : `hover:bg-gray-50 ${idx % 2 === 0 ? 'bg-gray-50/50' : 'bg-white'}`
+                          }`}
                           data-testid={`port-row-${port.id}`}
                         >
                           <td className="px-4 py-3">
@@ -335,39 +339,39 @@ function App() {
                               }`} />
                             </button>
                           </td>
-                          <td className="px-4 py-3 text-white font-medium">{port.service}</td>
+                          <td className={`px-4 py-3 font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>{port.service}</td>
                           <td className="px-4 py-3">
-                            <code className="text-blue-400 bg-gray-900/50 px-2 py-1 rounded">{port.port_internal}</code>
+                            <code className={`px-2 py-1 rounded ${darkMode ? 'text-blue-400 bg-gray-900/50' : 'text-blue-600 bg-blue-50'}`}>{port.port_internal}</code>
                           </td>
                           <td className="px-4 py-3">
-                            <code className="text-purple-400 bg-gray-900/50 px-2 py-1 rounded">{port.port_external}</code>
+                            <code className={`px-2 py-1 rounded ${darkMode ? 'text-purple-400 bg-gray-900/50' : 'text-purple-600 bg-purple-50'}`}>{port.port_external}</code>
                           </td>
                           <td className="px-4 py-3">
                             <span className={`px-2 py-1 rounded text-xs font-semibold ${
                               port.protocol.includes('TCP') && port.protocol.includes('UDP')
-                                ? 'bg-yellow-500/20 text-yellow-300'
+                                ? darkMode ? 'bg-yellow-500/20 text-yellow-300' : 'bg-yellow-100 text-yellow-800'
                                 : port.protocol.includes('TCP')
-                                ? 'bg-blue-500/20 text-blue-300'
-                                : 'bg-green-500/20 text-green-300'
+                                ? darkMode ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-100 text-blue-800'
+                                : darkMode ? 'bg-green-500/20 text-green-300' : 'bg-green-100 text-green-800'
                             }`}>
                               {port.protocol}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-gray-300 text-sm">{port.description}</td>
-                          <td className="px-4 py-3 text-gray-400 text-sm">{port.destination || '-'}</td>
-                          <td className="px-4 py-3 text-gray-400 text-sm">{port.ip_address || '-'}</td>
+                          <td className={`px-4 py-3 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{port.description}</td>
+                          <td className={`px-4 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{port.destination || '-'}</td>
+                          <td className={`px-4 py-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{port.ip_address || '-'}</td>
                           <td className="px-4 py-3">
                             <div className="flex gap-2">
                               <button
                                 onClick={() => handleEdit(port)}
-                                className="text-blue-400 hover:text-blue-300 p-1 rounded hover:bg-blue-500/10 transition-all"
+                                className={`p-1 rounded transition-all ${darkMode ? 'text-blue-400 hover:text-blue-300 hover:bg-blue-500/10' : 'text-blue-600 hover:text-blue-700 hover:bg-blue-100'}`}
                                 data-testid={`edit-port-${port.id}`}
                               >
                                 <Edit className="w-5 h-5" />
                               </button>
                               <button
                                 onClick={() => handleDelete(port.id)}
-                                className="text-red-400 hover:text-red-300 p-1 rounded hover:bg-red-500/10 transition-all"
+                                className={`p-1 rounded transition-all ${darkMode ? 'text-red-400 hover:text-red-300 hover:bg-red-500/10' : 'text-red-600 hover:text-red-700 hover:bg-red-100'}`}
                                 data-testid={`delete-port-${port.id}`}
                               >
                                 <Trash2 className="w-5 h-5" />

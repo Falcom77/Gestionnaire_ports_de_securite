@@ -630,6 +630,29 @@ function App() {
                     data-testid="input-mac-address"
                   />
                 </div>
+
+                <div className="md:col-span-2">
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    URL de l'icône (optionnel)
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={formData.icon_url}
+                      onChange={(e) => setFormData({...formData, icon_url: e.target.value})}
+                      className={`flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                        darkMode 
+                          ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                      }`}
+                      placeholder="https://example.com/icon.png"
+                      data-testid="input-icon-url"
+                    />
+                    {formData.icon_url && (
+                      <img src={formData.icon_url} alt="Preview" className="w-10 h-10 rounded border border-gray-300 object-cover" onError={(e) => e.target.style.display = 'none'} />
+                    )}
+                  </div>
+                </div>
               </div>
 
               <div>

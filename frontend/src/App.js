@@ -603,7 +603,7 @@ function App() {
                         )}
                       </div>
                     </th>
-                    <th className={`px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '100px'}}>Actions</th>
+                    <th className={`px-4 py-3 text-center text-xs font-medium uppercase tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={{width: '140px'}}>Actions</th>
                   </tr>
                 </thead>
                 <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>

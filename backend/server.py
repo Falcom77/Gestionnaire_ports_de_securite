@@ -43,6 +43,7 @@ class PortRule(BaseModel):
     destination: str = ""
     ip_address: str = ""
     mac_address: str = ""
+    icon_url: str = ""
     is_active: bool = True
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 

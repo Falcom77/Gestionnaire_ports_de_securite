@@ -507,12 +507,18 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Port Interne</label>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Port Interne <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     value={formData.port_internal}
                     onChange={(e) => setFormData({...formData, port_internal: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                    }`}
                     placeholder="8080 ou 8000-8100"
                     required
                     data-testid="input-port-internal"
@@ -520,12 +526,18 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Port Externe</label>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Port Externe <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     value={formData.port_external}
                     onChange={(e) => setFormData({...formData, port_external: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                    }`}
                     placeholder="48080 ou N/A"
                     required
                     data-testid="input-port-external"
@@ -533,11 +545,17 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Protocole</label>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Protocole <span className="text-red-500">*</span>
+                  </label>
                   <select
                     value={formData.protocol}
                     onChange={(e) => setFormData({...formData, protocol: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white' 
+                        : 'bg-white border-gray-300 text-gray-900'
+                    }`}
                     data-testid="select-protocol"
                   >
                     <option value="TCP">TCP</option>
@@ -547,36 +565,54 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Destination (VM/PC)</label>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Destination (VM/PC)
+                  </label>
                   <input
                     type="text"
                     value={formData.destination}
                     onChange={(e) => setFormData({...formData, destination: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                    }`}
                     placeholder="VM-Ubuntu-01"
                     data-testid="input-destination"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Adresse IP</label>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Adresse IP
+                  </label>
                   <input
                     type="text"
                     value={formData.ip_address}
                     onChange={(e) => setFormData({...formData, ip_address: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                    }`}
                     placeholder="192.168.1.100"
                     data-testid="input-ip-address"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Adresse MAC</label>
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Adresse MAC
+                  </label>
                   <input
                     type="text"
                     value={formData.mac_address}
                     onChange={(e) => setFormData({...formData, mac_address: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      darkMode 
+                        ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                    }`}
                     placeholder="00:1A:2B:3C:4D:5E"
                     data-testid="input-mac-address"
                   />
@@ -584,11 +620,17 @@ function App() {
               </div>
 
               <div>
-                <label className="block text-gray-300 text-sm font-medium mb-2">Description</label>
+                <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                  Description <span className="text-red-500">*</span>
+                </label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
-                  className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    darkMode 
+                      ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500' 
+                      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                  }`}
                   rows="3"
                   placeholder="Description de la règle..."
                   required
@@ -596,17 +638,17 @@ function App() {
                 />
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
                 <input
                   type="checkbox"
                   id="is_active"
                   checked={formData.is_active}
                   onChange={(e) => setFormData({...formData, is_active: e.target.checked})}
-                  className="w-5 h-5 text-blue-500 bg-gray-900 border-gray-700 rounded focus:ring-2 focus:ring-blue-500"
+                  className="w-5 h-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
                   data-testid="checkbox-is-active"
                 />
-                <label htmlFor="is_active" className="text-gray-300 font-medium">
-                  Règle active
+                <label htmlFor="is_active" className={`font-medium cursor-pointer ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                  Activer cette règle immédiatement
                 </label>
               </div>
 

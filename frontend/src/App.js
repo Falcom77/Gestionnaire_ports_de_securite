@@ -62,6 +62,19 @@ function App() {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   const fetchPorts = async () => {
     try {
       const response = await axios.get(`${API}/ports`);

@@ -162,6 +162,7 @@ function App() {
       destination: "",
       ip_address: "",
       mac_address: "",
+      icon_url: "",
       is_active: true
     });
   };

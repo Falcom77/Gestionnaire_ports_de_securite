@@ -659,6 +659,13 @@ function renderModals() {
                         <label>Adresse IP</label>
                         <input type="text" name="ip_address" id="ip_address">
                     </div>
+                    <div class="form-group">
+                        <label>URL de l'icône (optionnel)</label>
+                        <input type="url" name="icon_url" id="icon_url" placeholder="https://exemple.com/icon.png">
+                        <small style="color: #9ca3af; font-size: 0.75rem; margin-top: 0.25rem; display: block;">
+                            Lien direct vers une image (PNG, JPG, SVG). Si vide, affiche la première lettre.
+                        </small>
+                    </div>
                     <div class="modal-actions">
                         <button type="button" class="btn-cancel" onclick="closeModal('portModal')">Annuler</button>
                         <button type="submit" class="btn-submit">Enregistrer</button>

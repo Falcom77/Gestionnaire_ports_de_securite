@@ -520,7 +520,11 @@ function renderPorts() {
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="service-icon">${getServiceIcon(port.service)}</div>
+                                        ${port.icon_url ? 
+                                            `<img src="${port.icon_url}" alt="${port.service}" style="width: 40px; height: 40px; object-fit: contain; margin: 0 auto; display: block; border-radius: 8px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'service-icon\\'>${getServiceIcon(port.service)}</div>'">` 
+                                            : 
+                                            `<div class="service-icon">${getServiceIcon(port.service)}</div>`
+                                        }
                                     </td>
                                     <td>${port.service}</td>
                                     <td><span class="port-badge port-internal">${port.port_internal}</span></td>

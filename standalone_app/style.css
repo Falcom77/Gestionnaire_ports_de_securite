@@ -54,6 +54,7 @@ body.light-mode header {
 .logo-container {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .logo {

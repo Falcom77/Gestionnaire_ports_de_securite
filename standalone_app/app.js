@@ -398,7 +398,7 @@ function renderHeader() {
             <div class="header-content">
                 <div class="header-title">
                     <div class="logo-container">
-                        <div class="logo">CELLITECH</div>
+                        <img src="logo.png" alt="Cellitech Logo" class="logo" onerror="this.style.display='none'">
                     </div>
                     <div class="title-content">
                         <h1>
@@ -410,7 +410,9 @@ function renderHeader() {
                 </div>
                 <div class="header-actions">
                     <button class="btn btn-icon" onclick="toggleTheme()" title="${state.darkMode ? 'Mode clair' : 'Mode sombre'}">
-                        ${state.darkMode ? icons.sun : icons.moon}
+                        <span style="display: inline-block; width: 20px; height: 20px;">
+                            ${state.darkMode ? icons.sun : icons.moon}
+                        </span>
                     </button>
                     ${isPortsTab ? `
                         <button class="btn btn-orange" onclick="showCategoryModal()">

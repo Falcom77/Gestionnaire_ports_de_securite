@@ -384,12 +384,15 @@ function renderHeader() {
         <div class="container">
             <div class="header-content">
                 <div class="header-title">
-                    <h1>
-                        ${icons.shield}
-                        Gestionnaire de Ports pfSense
-                    </h1>
-                    <div>
-                        <p class="subtitle">Configuration et gestion des règles - Version Fonctionnelle</p>
+                    <div class="logo-container">
+                        <div class="logo">CELLITECH</div>
+                    </div>
+                    <div class="title-content">
+                        <h1>
+                            <span class="shield-icon">${icons.shield}</span>
+                            Gestionnaire de Ports pfSense
+                        </h1>
+                        <p class="subtitle">Configuration et gestion des règles - V2.0</p>
                     </div>
                 </div>
                 <div class="header-actions">

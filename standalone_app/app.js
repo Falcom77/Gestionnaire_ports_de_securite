@@ -49,22 +49,29 @@ const categoryColors = {
 
 // Initialisation
 async function init() {
+    console.log('🚀 Initialisation de l\'application...');
     try {
         // Charger depuis localStorage ou fichier data.json
         const saved = localStorage.getItem('pfSenseData');
         
         if (saved) {
+            console.log('📦 Chargement depuis localStorage');
             const data = JSON.parse(saved);
             state.ports = data.ports || [];
             state.devices = data.devices || [];
             state.categories = data.categories || [];
+            console.log(`✅ Chargé: ${state.ports.length} ports, ${state.devices.length} périphériques`);
         } else {
-            // Charger depuis data.json
+            console.log('📂 Chargement depuis data.json');
             const response = await fetch('data.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
             state.ports = data.ports || [];
             state.devices = data.devices || [];
             state.categories = data.categories || [];
+            console.log(`✅ Chargé depuis fichier: ${state.ports.length} ports, ${state.devices.length} périphériques`);
             saveToLocalStorage();
         }
         
@@ -72,9 +79,15 @@ async function init() {
         const savedTheme = localStorage.getItem('darkMode');
         state.darkMode = savedTheme === null ? true : savedTheme === 'true';
         
+        // Appliquer le thème
+        document.body.classList.toggle('light-mode', !state.darkMode);
+        
+        console.log('🎨 Rendu de l\'interface...');
         render();
+        console.log('✅ Application initialisée avec succès');
     } catch (error) {
-        console.error('Erreur initialisation:', error);
+        console.error('❌ Erreur initialisation:', error);
+        alert('Erreur lors du chargement des données. Vérifiez que tous les fichiers sont présents.');
         state.ports = [];
         state.devices = [];
         state.categories = ["Gaming", "VPN", "Monitoring", "Database", "Infrastructure", "Administration", "Network", "Home Automation"];

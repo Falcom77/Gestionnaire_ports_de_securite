@@ -411,35 +411,38 @@ function renderHeader() {
                     </div>
                 </div>
                 <div class="header-actions">
-                    <button class="btn btn-icon" onclick="toggleTheme()" title="${state.darkMode ? 'Mode clair' : 'Mode sombre'}">
+                    <button class="btn btn-icon btn-theme" onclick="toggleTheme()" title="${state.darkMode ? 'Mode clair' : 'Mode sombre'}">
                         <span style="display: inline-block; width: 20px; height: 20px;">
                             ${state.darkMode ? icons.sun : icons.moon}
                         </span>
                     </button>
                     ${isPortsTab ? `
-                        <button class="btn btn-orange" onclick="showCategoryModal()">
-                            ${icons.folder}
-                            <span>Catégorie</span>
-                        </button>
-                        <button class="btn btn-blue" onclick="showPortModal()">
+                        <button class="btn btn-blue btn-add-port" onclick="showPortModal()">
                             ${icons.plus}
                             <span>Ajouter Port</span>
                         </button>
-                        <button class="btn btn-purple" onclick="exportPfSense()">
+                        <button class="btn btn-green btn-export-csv" onclick="exportCSV()">
+                            ${icons.download}
+                            <span>Export CSV</span>
+                        </button>
+                        <button class="btn btn-orange btn-category" onclick="showCategoryModal()">
+                            ${icons.folder}
+                            <span>Catégorie</span>
+                        </button>
+                        <button class="btn btn-purple btn-pfsense" onclick="exportPfSense()">
                             ${icons.download}
                             <span>pfSense</span>
                         </button>
-                    ` : ''}
-                    ${!isPortsTab ? `
-                        <button class="btn btn-blue" onclick="showDeviceModal()">
+                    ` : `
+                        <button class="btn btn-blue btn-add-device" onclick="showDeviceModal()">
                             ${icons.plus}
                             <span>Ajouter Périphérique</span>
                         </button>
-                    ` : ''}
-                    <button class="btn btn-green" onclick="${isPortsTab ? 'exportCSV()' : 'exportDevicesCSV()'}">
-                        ${icons.download}
-                        <span>Export CSV</span>
-                    </button>
+                        <button class="btn btn-green btn-export-csv" onclick="exportDevicesCSV()">
+                            ${icons.download}
+                            <span>Export CSV</span>
+                        </button>
+                    `}
                 </div>
             </div>
         </div>

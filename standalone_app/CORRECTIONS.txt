@@ -1,0 +1,39 @@
+CORRECTIONS APPLIQUÉES
+======================
+
+1. ✅ Icône Jour/Nuit ajoutée dans le header (visible sur tous les onglets)
+
+2. ✅ Logo CELLITECH ajouté à gauche
+   - Style : Dégradé bleu/cyan
+   - Taille : 80x80px
+   - Position : À gauche du header
+
+3. ✅ Titre centré et restructuré
+   - "Gestionnaire de Ports pfSense" centré
+   - Sous-titre : "Configuration et gestion des règles - V2.0"
+   - Icône bouclier réduite à 32x32px
+
+4. ✅ Debug ajouté pour le chargement des données
+   - Logs console pour tracer le chargement
+   - Message d'erreur explicite si échec
+   - Vérification du fichier data.json
+
+STRUCTURE FINALE DU HEADER:
+[LOGO CELLITECH]  [BOUCLIER + TITRE CENTRÉ]  [BOUTONS ACTIONS]
+                       [SOUS-TITRE V2.0]
+
+COMMENT TESTER:
+1. Ouvrez index.html dans votre navigateur
+2. Ouvrez la console (F12) pour voir les logs
+3. Vérifiez que les données se chargent
+
+SI LE TABLEAU EST VIDE:
+- Ouvrez la console (F12)
+- Regardez les messages d'erreur
+- Vérifiez que data.json est dans le même dossier
+- Les fichiers doivent être servis via HTTP (pas file://)
+  Solution : Utilisez un serveur local simple
+
+SERVEUR LOCAL RAPIDE:
+python3 -m http.server 8000
+Puis ouvrez : http://localhost:8000/

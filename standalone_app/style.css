@@ -129,6 +129,17 @@ body.light-mode .subtitle {
     padding: 0.75rem;
     background: #374151;
     color: #fbbf24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.btn-icon svg {
+    width: 20px;
+    height: 20px;
+    display: block;
 }
 
 body.light-mode .btn-icon {

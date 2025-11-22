@@ -252,6 +252,7 @@ function submitPortForm(e) {
         category: form.category.value,
         destination: form.destination.value,
         ip_address: form.ip_address.value,
+        icon_url: form.icon_url.value,
         is_active: state.editingPort ? state.editingPort.is_active : true
     };
     

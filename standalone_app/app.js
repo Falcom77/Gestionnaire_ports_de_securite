@@ -198,6 +198,7 @@ function showPortModal(port = null) {
         form.category.value = port.category || '';
         form.destination.value = port.destination || '';
         form.ip_address.value = port.ip_address || '';
+        form.icon_url.value = port.icon_url || '';
     } else {
         document.getElementById('modalTitle').textContent = 'Ajouter un Port';
         form.reset();

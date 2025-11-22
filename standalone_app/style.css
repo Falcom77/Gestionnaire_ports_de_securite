@@ -25,7 +25,7 @@ header {
     background: rgba(31, 41, 55, 0.5);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(55, 65, 81, 1);
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 40;

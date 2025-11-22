@@ -1,8 +1,11 @@
-GESTIONNAIRE pfSense - VERSION FONCTIONNELLE COMPLÈTE
-======================================================
+GESTIONNAIRE pfSense - VERSION FONCTIONNELLE COMPLÈTE V2.0
+===========================================================
 
 UTILISATION:
-1. Ouvrez le fichier "index.html" dans votre navigateur
+1. IMPORTANT : Utilisez un serveur local (pas file://)
+   python3 -m http.server 8000
+   Puis ouvrez : http://localhost:8000/
+
 2. Toutes les fonctionnalités sont opérationnelles
 3. Les données sont sauvegardées dans le navigateur (localStorage)
 
@@ -11,6 +14,8 @@ STRUCTURE:
 - style.css : Tous les styles
 - app.js : Toute la logique JavaScript
 - data.json : Données initiales (67 ports + 6 périphériques)
+- logo.png : Votre logo (à ajouter)
+- logo.svg : Logo temporaire CELLITECH
 
 FONCTIONNALITÉS:
 ✅ Ajouter/Modifier/Supprimer des ports

@@ -34,3 +34,19 @@ Pour réinitialiser les données:
 - Ouvrez la console du navigateur (F12)
 - Tapez: localStorage.clear()
 - Rechargez la page
+
+AJUSTEMENT DE LA TAILLE DU LOGO:
+---------------------------------
+Le logo garde automatiquement ses proportions.
+Taille actuelle maximum : 300px de largeur
+
+Pour augmenter/diminuer la taille du logo:
+1. Ouvrez style.css
+2. Cherchez ".logo { max-width: 300px;"
+3. Changez 300px par la valeur souhaitée
+   - 200px = petit
+   - 300px = moyen (actuel)
+   - 400px = grand
+   - 500px = très grand
+
+Le logo s'adaptera automatiquement en hauteur pour garder les proportions.

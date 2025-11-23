@@ -139,6 +139,16 @@ body.light-mode .subtitle {
     grid-row: 1;
 }
 
+.btn-export-devices {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.icon-small {
+    width: 16px;
+    height: 16px;
+}
+
 .btn {
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;

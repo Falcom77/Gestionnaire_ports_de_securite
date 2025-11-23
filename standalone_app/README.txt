@@ -1,13 +1,34 @@
 GESTIONNAIRE pfSense - VERSION FONCTIONNELLE COMPLÈTE V2.0
 ===========================================================
 
-UTILISATION:
-1. IMPORTANT : Utilisez un serveur local (pas file://)
+⚠️ IMPORTANT - TABLEAU VIDE ?
+Si le tableau est vide, c'est normal ! Voir solution ci-dessous.
+
+UTILISATION CORRECTE:
+---------------------
+1. OBLIGATOIRE : Utilisez un serveur local (pas double-clic!)
+   
+   Terminal/Console:
+   cd /chemin/vers/standalone_app
    python3 -m http.server 8000
+   
    Puis ouvrez : http://localhost:8000/
 
 2. Toutes les fonctionnalités sont opérationnelles
 3. Les données sont sauvegardées dans le navigateur (localStorage)
+
+POURQUOI UN SERVEUR LOCAL ?
+----------------------------
+Le double-clic sur index.html ouvre en mode file://
+Le navigateur bloque alors le chargement de data.json (sécurité CORS)
+= Tableau vide
+
+Avec un serveur local (http://localhost):
+✅ data.json se charge correctement
+✅ 67 ports et 6 périphériques s'affichent
+✅ Toutes les fonctionnalités marchent
+
+Voir PROBLEME_TABLEAU_VIDE.txt pour plus de détails
 
 STRUCTURE:
 - index.html : Page principale

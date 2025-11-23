@@ -570,6 +570,16 @@ body.light-mode .btn-delete:hover {
     height: 24px;
 }
 
+.btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-small svg {
+    width: 16px;
+    height: 16px;
+}
+
 .modal {
     display: none;
     position: fixed;

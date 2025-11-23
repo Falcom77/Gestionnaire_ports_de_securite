@@ -50,6 +50,12 @@ const categoryColors = {
 // Initialisation
 async function init() {
     console.log('🚀 Initialisation de l\'application...');
+    
+    // Charger le thème d'abord
+    const savedTheme = localStorage.getItem('darkMode');
+    state.darkMode = savedTheme === null ? true : savedTheme === 'true';
+    document.body.classList.toggle('light-mode', !state.darkMode);
+    
     try {
         // Charger depuis localStorage ou fichier data.json
         const saved = localStorage.getItem('pfSenseData');
@@ -62,7 +68,14 @@ async function init() {
             state.categories = data.categories || [];
             console.log(`✅ Chargé: ${state.ports.length} ports, ${state.devices.length} périphériques`);
         } else {
-            console.log('📂 Chargement depuis data.json');
+            console.log('📂 Tentative de chargement depuis data.json');
+            
+            // Vérifier si on est en file:// protocol
+            if (window.location.protocol === 'file:') {
+                console.warn('⚠️ Mode file:// détecté - Chargement de data.json peut échouer');
+                console.warn('💡 Solution: Utilisez un serveur local (python3 -m http.server 8000)');
+            }
+            
             const response = await fetch('data.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -72,22 +85,35 @@ async function init() {
             state.devices = data.devices || [];
             state.categories = data.categories || [];
             console.log(`✅ Chargé depuis fichier: ${state.ports.length} ports, ${state.devices.length} périphériques`);
+            
+            // Sauvegarder dans localStorage pour les prochaines fois
             saveToLocalStorage();
+            console.log('💾 Données sauvegardées dans le navigateur');
         }
-        
-        // Charger le thème
-        const savedTheme = localStorage.getItem('darkMode');
-        state.darkMode = savedTheme === null ? true : savedTheme === 'true';
-        
-        // Appliquer le thème
-        document.body.classList.toggle('light-mode', !state.darkMode);
         
         console.log('🎨 Rendu de l\'interface...');
         render();
         console.log('✅ Application initialisée avec succès');
+        
     } catch (error) {
         console.error('❌ Erreur initialisation:', error);
-        alert('Erreur lors du chargement des données. Vérifiez que tous les fichiers sont présents.');
+        
+        // Message d'erreur détaillé
+        if (window.location.protocol === 'file:') {
+            alert('⚠️ ERREUR DE CHARGEMENT\n\n' +
+                  'Le fichier data.json ne peut pas être chargé en mode file://\n\n' +
+                  'SOLUTION:\n' +
+                  '1. Ouvrez un terminal dans le dossier standalone_app\n' +
+                  '2. Lancez: python3 -m http.server 8000\n' +
+                  '3. Ouvrez: http://localhost:8000/\n\n' +
+                  'Le tableau sera vide jusqu\'à ce que vous utilisiez un serveur local.');
+        } else {
+            alert('❌ Erreur lors du chargement des données.\n\n' +
+                  'Vérifiez que le fichier data.json est présent.\n\n' +
+                  'Erreur: ' + error.message);
+        }
+        
+        // Initialiser avec des données vides mais fonctionnelles
         state.ports = [];
         state.devices = [];
         state.categories = ["Gaming", "VPN", "Monitoring", "Database", "Infrastructure", "Administration", "Network", "Home Automation"];

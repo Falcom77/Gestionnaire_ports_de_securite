@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démarrage Rapide - pfSense Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .warning {
+            background: rgba(251, 191, 36, 0.2);
+            border-left: 4px solid #fbbf24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .success {
+            background: rgba(16, 185, 129, 0.2);
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .step {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Démarrage Rapide</h1>
+        <p style="font-size: 1.2rem; opacity: 0.9;">Gestionnaire de Ports pfSense V2.0</p>
+
+        <div class="warning">
+            <h3>⚠️ Le tableau est vide ?</h3>
+            <p>C'est normal si vous avez double-cliqué sur index.html</p>
+            <p><strong>Solution :</strong> Lancez un serveur local (2 minutes)</p>
+        </div>
+
+        <h2>📋 Étapes d'installation</h2>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Ouvrez un Terminal / Invite de commandes</strong>
+            <ul>
+                <li>Windows : Recherchez "cmd" ou "PowerShell"</li>
+                <li>Mac : Ouvrez "Terminal"</li>
+                <li>Linux : Ctrl+Alt+T</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Naviguez vers le dossier standalone_app</strong>
+            <div class="code">cd /chemin/vers/standalone_app</div>
+            <small>Remplacez par le chemin réel de votre dossier</small>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Lancez le serveur local</strong>
+            <div class="code">python3 -m http.server 8000</div>
+            <small>Sur Windows, essayez: <code style="background:rgba(0,0,0,0.3);padding:2px 5px;">python -m http.server 8000</code></small>
+        </div>
+
+        <div class="step">
+            <span class="step-number">4</span>
+            <strong>Ouvrez votre navigateur</strong>
+            <p>Allez sur : <a href="http://localhost:8000/">http://localhost:8000/</a></p>
+        </div>
+
+        <div class="success">
+            <h3>✅ C'est tout !</h3>
+            <p>Vous devriez maintenant voir :</p>
+            <ul>
+                <li>67 services/ports affichés</li>
+                <li>6 périphériques dans le parc informatique</li>
+                <li>Toutes les fonctionnalités actives</li>
+            </ul>
+        </div>
+
+        <h2>💡 Astuce</h2>
+        <p>Une fois les données chargées, elles sont sauvegardées dans votre navigateur. Vous pourrez ensuite ouvrir index.html directement sans serveur.</p>
+
+        <h2>🆘 Besoin d'aide ?</h2>
+        <p>Consultez les fichiers :</p>
+        <ul>
+            <li><strong>README.txt</strong> - Instructions complètes</li>
+            <li><strong>PROBLEME_TABLEAU_VIDE.txt</strong> - Solutions détaillées</li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="btn">→ Ouvrir l'application</a>
+        </div>
+
+        <p style="text-align: center; margin-top: 30px; opacity: 0.7; font-size: 0.9rem;">
+            Gestionnaire pfSense V2.0 - Version Standalone
+        </p>
+    </div>
+</body>
+</html>

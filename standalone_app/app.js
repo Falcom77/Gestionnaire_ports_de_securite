@@ -464,8 +464,8 @@ function renderHeader() {
                             ${icons.plus}
                             <span>Ajouter Périphérique</span>
                         </button>
-                        <button class="btn btn-green btn-export-csv" onclick="exportDevicesCSV()">
-                            ${icons.download}
+                        <button class="btn btn-green btn-export-devices" onclick="exportDevicesCSV()">
+                            <span class="icon-small">${icons.download}</span>
                             <span>Export CSV</span>
                         </button>
                     `}

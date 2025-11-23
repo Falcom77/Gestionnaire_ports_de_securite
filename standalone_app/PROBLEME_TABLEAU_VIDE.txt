@@ -1,0 +1,97 @@
+PROBLÈME: TABLEAU VIDE
+=======================
+
+CAUSE:
+------
+Le navigateur bloque le chargement de data.json quand vous ouvrez index.html 
+directement (protocole file://).
+
+C'est une restriction de sécurité des navigateurs modernes (CORS).
+
+SOLUTION 1 (RECOMMANDÉE) - SERVEUR LOCAL:
+-----------------------------------------
+
+1. Ouvrez un terminal/invite de commandes
+
+2. Naviguez vers le dossier standalone_app:
+   cd /chemin/vers/standalone_app
+
+3. Lancez un serveur HTTP simple:
+   
+   Sur Mac/Linux:
+   python3 -m http.server 8000
+   
+   Sur Windows:
+   python -m http.server 8000
+
+4. Ouvrez votre navigateur et allez sur:
+   http://localhost:8000/
+
+5. ✅ Le tableau devrait maintenant afficher les 67 ports et 6 périphériques
+
+
+SOLUTION 2 - UTILISER LOCALSTORAGE:
+------------------------------------
+
+Une fois que vous avez chargé l'application UNE FOIS avec un serveur local:
+- Les données sont sauvegardées dans le navigateur
+- Vous pouvez ensuite ouvrir index.html directement
+- Les données resteront disponibles
+
+Pour réinitialiser: Ouvrez la console (F12) et tapez:
+localStorage.clear()
+
+
+SOLUTION 3 - EXTENSIONS NAVIGATEUR:
+------------------------------------
+
+Chrome:
+- Extension "Web Server for Chrome"
+- Extension "Live Server"
+
+Firefox:
+- Désactiver temporairement CORS (non recommandé)
+
+Edge:
+- Même solutions que Chrome
+
+
+VÉRIFICATION:
+-------------
+
+Pour vérifier que data.json est bien chargé:
+
+1. Ouvrez la console du navigateur (F12)
+2. Cherchez ces messages:
+   🚀 Initialisation de l'application...
+   📂 Tentative de chargement depuis data.json
+   ✅ Chargé depuis fichier: 67 ports, 6 périphériques
+
+Si vous voyez:
+   ⚠️ Mode file:// détecté
+   
+Alors utilisez la SOLUTION 1 (serveur local)
+
+
+DONNÉES INCLUSES DANS data.json:
+---------------------------------
+- 67 services (ports) répartis en 8 catégories
+- 6 périphériques réseau
+- 8 catégories prédéfinies
+
+Une fois chargées, ces données sont automatiquement sauvegardées 
+dans le navigateur pour les prochaines utilisations.
+
+
+AIDE RAPIDE:
+------------
+
+Windows (PowerShell):
+  cd C:\chemin\vers\standalone_app
+  python -m http.server 8000
+  
+Mac/Linux (Terminal):
+  cd /chemin/vers/standalone_app
+  python3 -m http.server 8000
+
+Puis ouvrez: http://localhost:8000/

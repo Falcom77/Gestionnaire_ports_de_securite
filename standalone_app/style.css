@@ -517,6 +517,14 @@ body.light-mode .type-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: 36px;
+    min-height: 36px;
+}
+
+.btn-action svg {
+    width: 20px;
+    height: 20px;
+    display: block;
 }
 
 .btn-edit {

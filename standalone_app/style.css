@@ -101,52 +101,214 @@ body.light-mode .subtitle {
 }
 
 .header-actions {
-    display: grid;
-    grid-template-columns: auto auto auto;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn-menu {
+    padding: 0.75rem;
+    background: #374151;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.btn-menu:hover {
+    background: #4b5563;
+}
+
+body.light-mode .btn-menu {
+    background: #1f2937;
+}
+
+/* Sidebar Menu */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 280px;
+    background: rgba(31, 41, 55, 0.98);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid #374151;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .sidebar {
+    background: rgba(249, 250, 251, 0.98);
+    border-right: 1px solid #e5e7eb;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #374151;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.light-mode .sidebar-header {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.sidebar-title {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+body.light-mode .sidebar-title {
+    color: #1f2937;
+}
+
+.sidebar-content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-section-title {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+}
+
+.sidebar-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     gap: 0.75rem;
-    justify-content: flex-end;
-    align-items: start;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.3s;
+    text-align: left;
 }
 
-.btn-theme {
-    grid-column: 1;
-    grid-row: 1 / 3;
-    align-self: center;
+.sidebar-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
 }
 
-.btn-add-port {
-    grid-column: 2;
-    grid-row: 1;
+.sidebar-btn span {
+    flex: 1;
 }
 
-.btn-export-csv {
-    grid-column: 2;
-    grid-row: 2;
+.sidebar-btn:hover {
+    transform: translateX(5px);
 }
 
-.btn-category {
-    grid-column: 3;
-    grid-row: 1;
+.sidebar-btn-blue {
+    background: linear-gradient(to right, #3b82f6, #2563eb);
+    color: white;
 }
 
-.btn-pfsense {
-    grid-column: 3;
-    grid-row: 2;
+.sidebar-btn-blue:hover {
+    background: linear-gradient(to right, #2563eb, #1d4ed8);
 }
 
-.btn-add-device {
-    grid-column: 2;
-    grid-row: 1;
+.sidebar-btn-orange {
+    background: linear-gradient(to right, #f97316, #ea580c);
+    color: white;
 }
 
-.btn-export-devices {
-    grid-column: 3;
-    grid-row: 1;
+.sidebar-btn-orange:hover {
+    background: linear-gradient(to right, #ea580c, #c2410c);
 }
 
-.icon-small {
-    width: 16px;
-    height: 16px;
+.sidebar-btn-purple {
+    background: linear-gradient(to right, #8b5cf6, #7c3aed);
+    color: white;
+}
+
+.sidebar-btn-purple:hover {
+    background: linear-gradient(to right, #7c3aed, #6d28d9);
+}
+
+.sidebar-btn-green {
+    background: linear-gradient(to right, #10b981, #059669);
+    color: white;
+}
+
+.sidebar-btn-green:hover {
+    background: linear-gradient(to right, #059669, #047857);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* Footer */
+footer {
+    background: rgba(31, 41, 55, 0.5);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #374151;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+body.light-mode footer {
+    background: rgba(249, 250, 251, 0.9);
+    border-top: 1px solid #e5e7eb;
+}
+
+.footer-content {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+body.light-mode .footer-content {
+    color: #6b7280;
+}
+
+.footer-copyright {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.footer-creator {
+    font-style: italic;
+    opacity: 0.8;
 }
 
 .btn {

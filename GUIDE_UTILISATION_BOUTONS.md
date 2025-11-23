@@ -2,7 +2,7 @@
 
 ## 🎯 Où sont les boutons ?
 
-### Version Web (https://netportal-2.preview.emergentagent.com)
+### Version Web (https://pf-port-forward.preview.emergentagent.com)
 
 #### 1. 📋 Onglet "Règles de Ports"
 

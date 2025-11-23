@@ -2,7 +2,7 @@
 
 ## 🌐 Version WEB (Preview Emergent)
 
-**URL**: https://netportal-2.preview.emergentagent.com
+**URL**: https://pf-port-forward.preview.emergentagent.com
 
 ### ✅ Tous les boutons présents
 
@@ -121,7 +121,7 @@ ACTIONS
 ## 🔍 Comment identifier quelle version vous utilisez
 
 ### Version WEB:
-1. **URL commence par** `https://netportal-2.preview.emergentagent.com`
+1. **URL commence par** `https://pf-port-forward.preview.emergentagent.com`
 2. **Tous les boutons** fonctionnent
 3. **Les modifications** sont sauvegardées
 4. **Internet requis**
@@ -185,7 +185,7 @@ grep -i "title" /app/pfsense_standalone_complet.html
 ## ✅ Checklist de vérification
 
 ### Version WEB (Preview)
-- [ ] URL = `https://netportal-2.preview.emergentagent.com`
+- [ ] URL = `https://pf-port-forward.preview.emergentagent.com`
 - [ ] Bouton "Catégorie" visible (orange)
 - [ ] Bouton "+ Ajouter Port" visible (bleu)
 - [ ] Bouton "pfSense" visible (violet)

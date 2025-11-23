@@ -89,7 +89,7 @@ style={!darkMode ? {
 
 ### Version Web (avec serveur)
 ```
-URL: https://netportal-2.preview.emergentagent.com
+URL: https://pf-port-forward.preview.emergentagent.com
 ```
 - Modifications persistantes
 - Base de données MongoDB
@@ -181,7 +181,7 @@ Standalone/
 ## 📝 Instructions pour utiliser la version à jour
 
 ### Option 1: Version Web
-1. Ouvrez https://netportal-2.preview.emergentagent.com
+1. Ouvrez https://pf-port-forward.preview.emergentagent.com
 2. Toutes les fonctionnalités sont à jour
 
 ### Option 2: Version Standalone (LOCAL)
@@ -238,7 +238,7 @@ Standalone/
 **✅ TOUT EST PRÊT ET FONCTIONNEL !**
 
 **Fichiers à utiliser:**
-- Web: https://netportal-2.preview.emergentagent.com
+- Web: https://pf-port-forward.preview.emergentagent.com
 - Local: /app/pfsense_standalone_complet.html (46 KB)
 
 **Documentation:**

@@ -229,7 +229,7 @@ grep -i "COMPLETE FINAL" /app/pfsense_standalone_FINAL.html
 → Utilisez `pfsense_standalone_FINAL.html`
 
 ### Pour modifications/gestion
-→ Utilisez la version WEB: https://netportal-2.preview.emergentagent.com
+→ Utilisez la version WEB: https://pf-port-forward.preview.emergentagent.com
 
 ## 📝 Notes importantes
 

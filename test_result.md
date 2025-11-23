@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test de l'application pfSense - Gestionnaire de Ports at https://netportal-2.preview.emergentagent.com"
+user_problem_statement: "Test de l'application pfSense - Gestionnaire de Ports at https://pf-port-forward.preview.emergentagent.com"
 
 frontend:
   - task: "Main page ports tab functionality"

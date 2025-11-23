@@ -243,8 +243,8 @@ Configuration pfSense correspondante :
 ## 📱 Accessibilité
 
 L'application est accessible depuis :
-- **Frontend** : https://netportal-2.preview.emergentagent.com
-- **API Backend** : https://netportal-2.preview.emergentagent.com/api
+- **Frontend** : https://pf-port-forward.preview.emergentagent.com
+- **API Backend** : https://pf-port-forward.preview.emergentagent.com/api
 
 ## 🤝 Support
 

@@ -187,7 +187,7 @@ const categoryColors = {
 
 Pour la version web avec toutes les fonctionnalités :
 - Utilisez la preview Emergent
-- URL: https://netportal-2.preview.emergentagent.com
+- URL: https://pf-port-forward.preview.emergentagent.com
 
 ---
 

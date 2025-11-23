@@ -1,0 +1,66 @@
+CORRECTIONS FINALES APPLIQUÉES
+===============================
+
+1. COLONNE ACTIONS - ICÔNES VISIBLES
+-------------------------------------
+✅ Icône "Modifier" (crayon bleu) ajoutée
+✅ Icône "Supprimer" (poubelle rouge) ajoutée
+✅ Taille fixe : 20x20px
+✅ Boutons : 36x36px minimum
+✅ Hover effet : agrandissement + changement couleur
+
+CSS mis à jour:
+- .btn-action svg { width: 20px; height: 20px; }
+- min-width et min-height sur les boutons
+- display: block sur les SVG
+
+
+2. ONGLET PARC INFORMATIQUE - BOUTONS CÔTE À CÔTE
+--------------------------------------------------
+AVANT:
+[Ajouter Périphérique]
+[Export CSV         ]
+
+APRÈS:
+[Ajouter Périphérique] [Export CSV]
+
+✅ Disposition CSS Grid modifiée
+✅ Ajouter Périphérique: Colonne 2
+✅ Export CSV: Colonne 3
+✅ Même ligne (row 1)
+
+
+3. ICÔNE EXPORT CSV RÉDUITE
+----------------------------
+✅ Taille réduite à 16x16px (au lieu de 20px)
+✅ Classe CSS: .icon-small
+✅ Appliquée uniquement sur Export CSV de l'onglet Parc
+
+
+RÉSUMÉ CSS:
+-----------
+Boutons header généraux: 20x20px
+Boutons actions tableau: 20x20px
+Export CSV (parc): 16x16px (réduit)
+
+
+VÉRIFICATION:
+-------------
+1. Ouvrez l'application
+2. Onglet "Règles de Ports":
+   - Vérifiez les icônes ✏️ et 🗑️ dans la colonne Actions
+3. Onglet "Parc Informatique":
+   - Boutons côte à côte en haut
+   - Icône Export CSV plus petite
+   - Icônes ✏️ et 🗑️ dans la colonne Actions
+
+
+DISPOSITION FINALE HEADER:
+---------------------------
+
+ONGLET PORTS:
+[☀️]  [Ajouter Port]  [Catégorie]
+      [Export CSV  ]  [pfSense  ]
+
+ONGLET PARC:
+[☀️]  [Ajouter Périphérique]  [Export CSV]

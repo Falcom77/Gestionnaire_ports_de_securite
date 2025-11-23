@@ -22,7 +22,8 @@ const icons = {
     download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>',
     edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
     trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
-    x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+    x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+    desktop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>'
 };
 
 const categoryIcons = {
@@ -157,6 +158,7 @@ function closeSidebar() {
 // Changer onglet
 function switchTab(tab) {
     state.activeTab = tab;
+    closeSidebar();
     render();
 }
 
@@ -245,6 +247,7 @@ function showPortModal(port = null) {
         form.reset();
     }
     
+    closeSidebar();
     modal.classList.add('active');
 }
 
@@ -265,10 +268,12 @@ function showDeviceModal(device = null) {
         form.reset();
     }
     
+    closeSidebar();
     modal.classList.add('active');
 }
 
 function showCategoryModal() {
+    closeSidebar();
     document.getElementById('categoryModal').classList.add('active');
 }
 
@@ -381,6 +386,7 @@ function exportCSV() {
         csv += `"${p.service}","${p.port_internal}","${p.port_external}","${p.protocol}","${p.description}","${p.category}","${p.destination || ''}","${p.ip_address || ''}","${p.is_active ? 'Oui' : 'Non'}"\\n`;
     });
     downloadFile(csv, 'pfsense_ports.csv', 'text/csv');
+    closeSidebar();
 }
 
 function exportPfSense() {
@@ -389,6 +395,7 @@ function exportPfSense() {
         config += `pass in on wan proto ${p.protocol.toLowerCase()} from any to any port ${p.port_external} → ${p.port_internal} # ${p.service}\\n`;
     });
     downloadFile(config, 'pfsense_config.txt', 'text/plain');
+    closeSidebar();
 }
 
 function exportDevicesCSV() {
@@ -397,6 +404,7 @@ function exportDevicesCSV() {
         csv += `"${d.hostname}","${d.ip_address}","${d.mac_address || ''}","${d.device_type}","${d.description || ''}"\\n`;
     });
     downloadFile(csv, 'parc_informatique.csv', 'text/csv');
+    closeSidebar();
 }
 
 function downloadFile(content, filename, type) {
@@ -427,6 +435,7 @@ function onDestinationChange() {
 function render() {
     document.body.classList.toggle('light-mode', !state.darkMode);
     renderHeader();
+    renderSidebar();
     renderTabs();
     renderContent();
     renderModals();
@@ -465,6 +474,44 @@ function renderHeader() {
                     </button>
                 </div>
             </div>
+        </div>
+    `;
+}
+
+function renderSidebar() {
+    const sidebarContent = document.getElementById('sidebarContent');
+    
+    sidebarContent.innerHTML = `
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Actions</div>
+            <button class="sidebar-btn sidebar-btn-blue" onclick="showPortModal()">
+                ${icons.plus}
+                <span>Ajouter Port</span>
+            </button>
+            <button class="sidebar-btn sidebar-btn-orange" onclick="showDeviceModal()">
+                ${icons.desktop}
+                <span>Ajouter Périphérique</span>
+            </button>
+            <button class="sidebar-btn sidebar-btn-purple" onclick="showCategoryModal()">
+                ${icons.folder}
+                <span>Ajouter Catégorie</span>
+            </button>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Exports</div>
+            <button class="sidebar-btn sidebar-btn-green" onclick="exportCSV()">
+                ${icons.download}
+                <span>Export CSV Ports</span>
+            </button>
+            <button class="sidebar-btn sidebar-btn-green" onclick="exportPfSense()">
+                ${icons.download}
+                <span>Export pfSense</span>
+            </button>
+            <button class="sidebar-btn sidebar-btn-green" onclick="exportDevicesCSV()">
+                ${icons.download}
+                <span>Export Parc Informatique</span>
+            </button>
         </div>
     `;
 }
@@ -544,7 +591,7 @@ function renderPorts() {
                                     </td>
                                     <td>
                                         ${port.icon_url ? 
-                                            `<img src="${port.icon_url}" alt="${port.service}" style="width: 40px; height: 40px; object-fit: contain; margin: 0 auto; display: block; border-radius: 8px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'service-icon\\'>${getServiceIcon(port.service)}</div>'">` 
+                                            `<img src="${port.icon_url}" alt="${port.service}" style="width: 40px; height: 40px; object-fit: contain; margin: 0 auto; display: block; border-radius: 8px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'service-icon\'>${getServiceIcon(port.service)}</div>'">` 
                                             : 
                                             `<div class="service-icon">${getServiceIcon(port.service)}</div>`
                                         }

@@ -268,6 +268,77 @@ function saveToLocalStorage() {
         categories: state.categories
     };
     localStorage.setItem('pfSenseData', JSON.stringify(data));
+    
+    // Marquer comme ayant des modifications non sauvegardées
+    state.hasUnsavedChanges = true;
+    render();
+}
+
+// Exporter data.js
+function exportDataJs() {
+    try {
+        const data = {
+            ports: state.ports,
+            devices: state.devices,
+            categories: state.categories
+        };
+        
+        // Générer le contenu du fichier data.js
+        const content = '// Données de l\'application pfSense\n' +
+                       '// Dernière sauvegarde: ' + new Date().toLocaleString() + '\n' +
+                       'const initialData = ' + JSON.stringify(data, null, 2) + ';';
+        
+        // Télécharger le fichier
+        downloadFile(content, 'data.js', 'text/javascript');
+        
+        // Marquer comme sauvegardé
+        state.hasUnsavedChanges = false;
+        
+        // Afficher notification
+        showNotification(t('dataSaved'));
+        
+        closeSidebar();
+        render();
+    } catch (error) {
+        console.error('❌ Erreur export data.js:', error);
+        alert(t('errorSaveData') + '\n\n' + error.message);
+    }
+}
+
+// Afficher une notification temporaire
+function showNotification(message) {
+    // Supprimer notification existante si présente
+    const existingNotif = document.getElementById('notification');
+    if (existingNotif) {
+        existingNotif.remove();
+    }
+    
+    // Créer la notification
+    const notification = document.createElement('div');
+    notification.id = 'notification';
+    notification.className = 'notification';
+    notification.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animation d'apparition
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+    
+    // Disparition après 5 secondes
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 5000);
 }
 
 // Recharger depuis data.js (données initiales)

@@ -385,6 +385,9 @@ function reloadFromDataJs() {
                 : 'Initial data successfully reloaded from data.js!\n\n' +
                   'If you modified data.js, reload the page (F5) to see your changes.';
             
+            // Réinitialiser l'indicateur
+            state.hasUnsavedChanges = false;
+            
             alert(successMessage);
         } else {
             throw new Error('initialData non trouvée dans data.js');

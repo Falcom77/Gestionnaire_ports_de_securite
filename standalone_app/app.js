@@ -613,20 +613,23 @@ function renderHeader() {
                     <div class="title-content">
                         <h1>
                             <span class="shield-icon">${icons.shield}</span>
-                            Gestionnaire de Ports pfSense
+                            ${t('title')}
                         </h1>
-                        <p class="subtitle">Configuration et gestion des règles - V2.0</p>
+                        <p class="subtitle">${t('subtitle')}</p>
                     </div>
                 </div>
                 <div class="header-actions">
-                    <button class="btn-menu" onclick="toggleSidebar()" title="Menu">
+                    <button class="btn-menu" onclick="toggleSidebar()" title="${t('menu')}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg>
                     </button>
-                    <button class="btn btn-icon btn-theme" onclick="toggleTheme()" title="${state.darkMode ? 'Mode clair' : 'Mode sombre'}">
+                    <button class="btn btn-icon" onclick="toggleLanguage()" title="${state.language === 'fr' ? 'English' : 'Français'}" style="background: #374151; color: white; min-width: 48px; min-height: 48px;">
+                        <span style="font-weight: bold; font-size: 14px;">${state.language.toUpperCase()}</span>
+                    </button>
+                    <button class="btn btn-icon btn-theme" onclick="toggleTheme()" title="${state.darkMode ? t('lightMode') : t('darkMode')}">
                         <span style="display: inline-block; width: 20px; height: 20px;">
                             ${state.darkMode ? icons.sun : icons.moon}
                         </span>

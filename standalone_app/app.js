@@ -809,7 +809,21 @@ function renderSidebar() {
         </div>
         
         <div class="sidebar-section">
-            <div class="sidebar-section-title">DATA</div>
+            <div class="sidebar-section-title">
+                DATA
+                ${state.hasUnsavedChanges 
+                    ? '<span style="color: #ef4444; margin-left: 0.5rem;" title="' + t('unsavedChanges') + '">●</span>' 
+                    : '<span style="color: #10b981; margin-left: 0.5rem;" title="' + t('allSaved') + '">✓</span>'}
+            </div>
+            <button class="sidebar-btn sidebar-btn-green" onclick="exportDataJs()" style="background: linear-gradient(to right, #10b981, #059669);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                    <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+                <span>${t('saveDataJs')}</span>
+                ${state.hasUnsavedChanges ? '<span style="color: #fbbf24; font-size: 1.2rem; margin-left: auto;">●</span>' : ''}
+            </button>
             <button class="sidebar-btn sidebar-btn-blue" onclick="reloadFromDataJs()" style="background: linear-gradient(to right, #6366f1, #8b5cf6);">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
                     <polyline points="23 4 23 10 17 10"></polyline>

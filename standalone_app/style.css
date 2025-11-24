@@ -127,6 +127,31 @@ body.light-mode .btn-menu {
     background: #1f2937;
 }
 
+.btn-lang {
+    padding: 0.75rem;
+    background: #374151;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.btn-lang:hover {
+    background: #4b5563;
+}
+
+body.light-mode .btn-lang {
+    background: #1f2937;
+}
+
 /* Sidebar Menu */
 .sidebar {
     position: fixed;

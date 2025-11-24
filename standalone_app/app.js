@@ -916,26 +916,26 @@ function renderModals() {
         <div id="deviceModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 id="deviceModalTitle">Ajouter un Périphérique</h2>
+                    <h2 id="deviceModalTitle">${t('addDeviceModal')}</h2>
                     <button class="btn-close" onclick="closeModal('deviceModal')">${icons.x}</button>
                 </div>
                 <form id="deviceForm" onsubmit="submitDeviceForm(event)">
                     <div class="form-group">
-                        <label>Hostname *</label>
+                        <label>${t('hostnameLabel')}</label>
                         <input type="text" name="hostname" required>
                     </div>
                     <div class="form-group">
-                        <label>Adresse IP/Masque *</label>
+                        <label>${t('ipMaskLabel')}</label>
                         <input type="text" name="ip_address" required placeholder="192.168.1.100/24">
                     </div>
                     <div class="form-group">
-                        <label>Adresse MAC</label>
+                        <label>${t('macLabel')}</label>
                         <input type="text" name="mac_address" placeholder="AA:BB:CC:DD:EE:FF">
                     </div>
                     <div class="form-group">
-                        <label>Type *</label>
+                        <label>${t('typeLabel')}</label>
                         <select name="device_type" required>
-                            <option value="">Sélectionner...</option>
+                            <option value="">${t('select')}</option>
                             <option value="PC">PC</option>
                             <option value="Serveur">Serveur</option>
                             <option value="VM">VM</option>
@@ -947,12 +947,12 @@ function renderModals() {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
+                        <label>${t('descriptionLabel')}</label>
                         <textarea name="device_description" rows="2"></textarea>
                     </div>
                     <div class="modal-actions">
-                        <button type="button" class="btn-cancel" onclick="closeModal('deviceModal')">Annuler</button>
-                        <button type="submit" class="btn-submit">Enregistrer</button>
+                        <button type="button" class="btn-cancel" onclick="closeModal('deviceModal')">${t('cancel')}</button>
+                        <button type="submit" class="btn-submit">${t('save')}</button>
                     </div>
                 </form>
             </div>
@@ -962,17 +962,17 @@ function renderModals() {
         <div id="categoryModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Ajouter une Catégorie</h2>
+                    <h2>${t('addCategoryModal')}</h2>
                     <button class="btn-close" onclick="closeModal('categoryModal')">${icons.x}</button>
                 </div>
                 <form onsubmit="submitCategoryForm(event)">
                     <div class="form-group">
-                        <label>Nom de la catégorie *</label>
+                        <label>${t('categoryName')}</label>
                         <input type="text" name="category_name" required>
                     </div>
                     <div class="modal-actions">
-                        <button type="button" class="btn-cancel" onclick="closeModal('categoryModal')">Annuler</button>
-                        <button type="submit" class="btn-submit">Ajouter</button>
+                        <button type="button" class="btn-cancel" onclick="closeModal('categoryModal')">${t('cancel')}</button>
+                        <button type="submit" class="btn-submit">${t('add')}</button>
                     </div>
                 </form>
             </div>

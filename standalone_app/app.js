@@ -294,13 +294,37 @@ function saveToLocalStorage() {
 
 // Recharger depuis data.json
 async function reloadFromDataJson() {
+    // Vérifier si on est en mode file://
+    if (window.location.protocol === 'file:') {
+        const helpMessage = state.language === 'fr' 
+            ? '⚠️ MODE FILE:// DÉTECTÉ\n\n' +
+              'Le rechargement depuis data.json nécessite un serveur web local.\n\n' +
+              'SOLUTION:\n' +
+              '1. Ouvrez un terminal dans le dossier standalone_app\n' +
+              '2. Lancez: python3 -m http.server 8000\n' +
+              '   (ou: python -m http.server 8000)\n' +
+              '3. Ouvrez: http://localhost:8000\n\n' +
+              'Une fois le serveur démarré, vous pourrez recharger les données.'
+            : '⚠️ FILE:// MODE DETECTED\n\n' +
+              'Reloading from data.json requires a local web server.\n\n' +
+              'SOLUTION:\n' +
+              '1. Open a terminal in the standalone_app folder\n' +
+              '2. Run: python3 -m http.server 8000\n' +
+              '   (or: python -m http.server 8000)\n' +
+              '3. Open: http://localhost:8000\n\n' +
+              'Once the server is running, you can reload the data.';
+        
+        alert(helpMessage);
+        return;
+    }
+    
     if (!confirm(t('confirmReloadData'))) {
         return;
     }
     
     try {
         console.log('📂 Rechargement depuis data.json...');
-        const response = await fetch('data.json');
+        const response = await fetch('data.json?t=' + new Date().getTime());
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -319,7 +343,26 @@ async function reloadFromDataJson() {
         render();
     } catch (error) {
         console.error('❌ Erreur rechargement:', error);
-        alert(t('errorReloadData') + '\n\n' + error.message);
+        
+        let errorMessage = t('errorReloadData') + '\n\n';
+        
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+            errorMessage += state.language === 'fr'
+                ? 'Impossible de charger data.json.\n\n' +
+                  'Vérifiez que:\n' +
+                  '• Le fichier data.json existe\n' +
+                  '• Un serveur web local est lancé\n' +
+                  '• Vous accédez via http://localhost'
+                : 'Unable to load data.json.\n\n' +
+                  'Please check that:\n' +
+                  '• The data.json file exists\n' +
+                  '• A local web server is running\n' +
+                  '• You are accessing via http://localhost';
+        } else {
+            errorMessage += error.message;
+        }
+        
+        alert(errorMessage);
     }
 }
 

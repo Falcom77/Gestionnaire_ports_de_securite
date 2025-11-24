@@ -598,6 +598,19 @@ function render() {
     renderTabs();
     renderContent();
     renderModals();
+    renderFooter();
+}
+
+function renderFooter() {
+    const footer = document.getElementById('footer');
+    footer.innerHTML = `
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-copyright">${t('footerCopyright')}</div>
+                <div class="footer-creator">${t('footerCreator')}</div>
+            </div>
+        </div>
+    `;
 }
 
 function renderHeader() {

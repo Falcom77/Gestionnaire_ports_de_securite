@@ -721,9 +721,9 @@ function renderPorts() {
                     <h2>
                         <span class="category-icon">${icon}</span>
                         ${category}
-                        <span class="category-count">(${ports.length} règles)</span>
+                        <span class="category-count">(${ports.length} ${t('rules')})</span>
                     </h2>
-                    <button class="btn-delete-category" onclick="deleteCategory('${category}')" title="Supprimer la catégorie">
+                    <button class="btn-delete-category" onclick="deleteCategory('${category}')" title="${t('deleteCategory')}">
                         ${icons.trash}
                     </button>
                 </div>
@@ -731,16 +731,16 @@ function renderPorts() {
                     <table>
                         <thead>
                             <tr>
-                                <th style="width:75px">État</th>
-                                <th style="width:60px">Icône</th>
-                                <th style="width:180px">Service</th>
-                                <th style="width:110px">Port Int.</th>
-                                <th style="width:110px">Port Ext.</th>
-                                <th style="width:90px">Proto</th>
-                                <th style="width:200px">Description</th>
-                                <th style="width:130px">Dest.</th>
-                                <th style="width:130px">IP</th>
-                                <th style="width:120px; text-align:center">Actions</th>
+                                <th style="width:75px">${t('state')}</th>
+                                <th style="width:60px">${t('icon')}</th>
+                                <th style="width:180px">${t('service')}</th>
+                                <th style="width:110px">${t('portInt')}</th>
+                                <th style="width:110px">${t('portExt')}</th>
+                                <th style="width:90px">${t('protocol')}</th>
+                                <th style="width:200px">${t('description')}</th>
+                                <th style="width:130px">${t('destination')}</th>
+                                <th style="width:130px">${t('ip')}</th>
+                                <th style="width:120px; text-align:center">${t('actions_col')}</th>
                             </tr>
                         </thead>
                         <tbody>

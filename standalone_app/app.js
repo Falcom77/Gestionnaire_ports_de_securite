@@ -645,34 +645,34 @@ function renderSidebar() {
     
     sidebarContent.innerHTML = `
         <div class="sidebar-section">
-            <div class="sidebar-section-title">Actions</div>
+            <div class="sidebar-section-title">${t('actions')}</div>
             <button class="sidebar-btn sidebar-btn-blue" onclick="showPortModal()">
                 ${icons.plus}
-                <span>Ajouter Port</span>
+                <span>${t('addPort')}</span>
             </button>
             <button class="sidebar-btn sidebar-btn-orange" onclick="showDeviceModal()">
                 ${icons.desktop}
-                <span>Ajouter Périphérique</span>
+                <span>${t('addDevice')}</span>
             </button>
             <button class="sidebar-btn sidebar-btn-purple" onclick="showCategoryModal()">
                 ${icons.folder}
-                <span>Ajouter Catégorie</span>
+                <span>${t('addCategory')}</span>
             </button>
         </div>
         
         <div class="sidebar-section">
-            <div class="sidebar-section-title">Exports</div>
+            <div class="sidebar-section-title">${t('exports')}</div>
             <button class="sidebar-btn sidebar-btn-green" onclick="exportCSV()">
                 ${icons.download}
-                <span>Export CSV Ports</span>
+                <span>${t('exportCSVPorts')}</span>
             </button>
             <button class="sidebar-btn sidebar-btn-green" onclick="exportPfSense()">
                 ${icons.download}
-                <span>Export pfSense</span>
+                <span>${t('exportPfSense')}</span>
             </button>
             <button class="sidebar-btn sidebar-btn-green" onclick="exportDevicesCSV()">
                 ${icons.download}
-                <span>Export Parc Informatique</span>
+                <span>${t('exportDevices')}</span>
             </button>
         </div>
     `;

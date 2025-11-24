@@ -10,7 +10,8 @@ let state = {
     activeTab: 'ports',
     sortConfig: { key: null, direction: 'asc' },
     editingPort: null,
-    editingDevice: null
+    editingDevice: null,
+    hasUnsavedChanges: false
 };
 
 // Traductions

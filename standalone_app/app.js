@@ -201,10 +201,13 @@ const categoryColors = {
 async function init() {
     console.log('🚀 Initialisation de l\'application...');
     
-    // Charger le thème d'abord
+    // Charger le thème et la langue
     const savedTheme = localStorage.getItem('darkMode');
     state.darkMode = savedTheme === null ? true : savedTheme === 'true';
     document.body.classList.toggle('light-mode', !state.darkMode);
+    
+    const savedLanguage = localStorage.getItem('language');
+    state.language = savedLanguage || 'fr';
     
     try {
         // Charger depuis localStorage ou fichier data.json

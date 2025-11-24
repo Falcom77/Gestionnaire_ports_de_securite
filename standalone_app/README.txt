@@ -44,9 +44,12 @@ FONCTIONNALITÉS:
 ✅ Ajouter/Supprimer des catégories
 ✅ Toggle actif/inactif pour les ports
 ✅ Tri du parc informatique
-✅ Mode sombre/clair
+✅ Mode sombre/clair 🌓
+✅ Changement de langue FR/EN 🌍
+✅ Menu latéral avec toutes les actions
 ✅ Export CSV (ports et périphériques)
 ✅ Export configuration pfSense
+✅ Recharger depuis data.json 🔄
 ✅ Sauvegarde automatique dans le navigateur
 
 TOUS LES BOUTONS SONT FONCTIONNELS !

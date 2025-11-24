@@ -767,10 +767,10 @@ function renderPorts() {
                                     <td>${port.ip_address || '-'}</td>
                                     <td>
                                         <div class="actions">
-                                            <button class="btn-action btn-edit" onclick='showPortModal(${JSON.stringify(port).replace(/'/g, "&apos;")})' title="Modifier">
+                                            <button class="btn-action btn-edit" onclick='showPortModal(${JSON.stringify(port).replace(/'/g, "&apos;")})' title="${t('edit')}">
                                                 ${icons.edit}
                                             </button>
-                                            <button class="btn-action btn-delete" onclick="deletePort('${port.id}')" title="Supprimer">
+                                            <button class="btn-action btn-delete" onclick="deletePort('${port.id}')" title="${t('delete')}">
                                                 ${icons.trash}
                                             </button>
                                         </div>

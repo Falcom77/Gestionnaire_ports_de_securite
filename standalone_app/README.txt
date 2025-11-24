@@ -37,19 +37,24 @@ FONCTIONNALITÉS:
 
 TOUS LES BOUTONS SONT FONCTIONNELS !
 
-RECHARGER LES DONNÉES DEPUIS data.json:
------------------------------------------
-Si vous modifiez data.json et que les changements ne s'affichent pas:
-1. Ouvrez l'application
-2. Menu (☰) → Section DATA
-3. Cliquez sur "Recharger depuis data.json"
-4. Confirmez le rechargement
-✅ Vos nouvelles données sont chargées !
+MODIFIER VOS DONNÉES:
+----------------------
+Pour ajouter/modifier vos règles de port et périphériques:
 
-Pour réinitialiser complètement:
-- Ouvrez la console du navigateur (F12)
-- Tapez: localStorage.clear()
-- Rechargez la page
+MÉTHODE 1 - Via l'interface (Recommandé):
+- Utilisez les boutons dans le menu (☰)
+- Vos modifications sont sauvegardées automatiquement
+
+MÉTHODE 2 - Éditer data.js directement:
+1. Ouvrez data.js avec un éditeur de texte
+2. Modifiez les données (respectez la syntaxe JSON)
+3. Sauvegardez le fichier
+4. Dans l'application : Menu (☰) → DATA → "Recharger depuis data.js"
+   OU rechargez simplement la page (F5)
+
+Pour réinitialiser aux données initiales:
+- Menu (☰) → DATA → "Recharger depuis data.js"
+- Ou console navigateur (F12) : localStorage.clear() puis F5
 
 AJUSTEMENT DE LA TAILLE DU LOGO:
 ---------------------------------

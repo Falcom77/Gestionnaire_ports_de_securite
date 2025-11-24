@@ -275,75 +275,53 @@ function saveToLocalStorage() {
     localStorage.setItem('pfSenseData', JSON.stringify(data));
 }
 
-// Recharger depuis data.json
-async function reloadFromDataJson() {
-    // Vérifier si on est en mode file://
-    if (window.location.protocol === 'file:') {
-        const helpMessage = state.language === 'fr' 
-            ? '⚠️ MODE FILE:// DÉTECTÉ\n\n' +
-              'Le rechargement depuis data.json nécessite un serveur web local.\n\n' +
-              'SOLUTION:\n' +
-              '1. Ouvrez un terminal dans le dossier standalone_app\n' +
-              '2. Lancez: python3 -m http.server 8000\n' +
-              '   (ou: python -m http.server 8000)\n' +
-              '3. Ouvrez: http://localhost:8000\n\n' +
-              'Une fois le serveur démarré, vous pourrez recharger les données.'
-            : '⚠️ FILE:// MODE DETECTED\n\n' +
-              'Reloading from data.json requires a local web server.\n\n' +
-              'SOLUTION:\n' +
-              '1. Open a terminal in the standalone_app folder\n' +
-              '2. Run: python3 -m http.server 8000\n' +
-              '   (or: python -m http.server 8000)\n' +
-              '3. Open: http://localhost:8000\n\n' +
-              'Once the server is running, you can reload the data.';
-        
-        alert(helpMessage);
-        return;
-    }
+// Recharger depuis data.js (données initiales)
+function reloadFromDataJs() {
+    const confirmMessage = state.language === 'fr'
+        ? 'Êtes-vous sûr de vouloir recharger les données initiales depuis data.js ?\n\n' +
+          'Toutes les modifications non exportées seront perdues.\n\n' +
+          'Note: Si vous avez modifié data.js, vous devez recharger la page (F5) pour voir les changements.'
+        : 'Are you sure you want to reload initial data from data.js?\n\n' +
+          'All unexported changes will be lost.\n\n' +
+          'Note: If you modified data.js, you must reload the page (F5) to see the changes.';
     
-    if (!confirm(t('confirmReloadData'))) {
+    if (!confirm(confirmMessage)) {
         return;
     }
     
     try {
-        console.log('📂 Rechargement depuis data.json...');
-        const response = await fetch('data.json?t=' + new Date().getTime());
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        console.log('📂 Rechargement des données initiales depuis data.js...');
+        
+        // Charger depuis initialData
+        if (typeof initialData !== 'undefined') {
+            state.ports = JSON.parse(JSON.stringify(initialData.ports || []));
+            state.devices = JSON.parse(JSON.stringify(initialData.devices || []));
+            state.categories = JSON.parse(JSON.stringify(initialData.categories || []));
+            
+            // Sauvegarder dans localStorage
+            saveToLocalStorage();
+            
+            console.log(`✅ Rechargé: ${state.ports.length} ports, ${state.devices.length} périphériques`);
+            
+            const successMessage = state.language === 'fr'
+                ? 'Données initiales rechargées avec succès depuis data.js !\n\n' +
+                  'Si vous avez modifié data.js, rechargez la page (F5) pour voir vos modifications.'
+                : 'Initial data successfully reloaded from data.js!\n\n' +
+                  'If you modified data.js, reload the page (F5) to see your changes.';
+            
+            alert(successMessage);
+        } else {
+            throw new Error('initialData non trouvée dans data.js');
         }
-        const data = await response.json();
-        state.ports = data.ports || [];
-        state.devices = data.devices || [];
-        state.categories = data.categories || [];
-        
-        // Sauvegarder dans localStorage
-        saveToLocalStorage();
-        
-        console.log(`✅ Rechargé: ${state.ports.length} ports, ${state.devices.length} périphériques`);
-        alert(t('dataReloaded'));
         
         closeSidebar();
         render();
     } catch (error) {
         console.error('❌ Erreur rechargement:', error);
         
-        let errorMessage = t('errorReloadData') + '\n\n';
-        
-        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-            errorMessage += state.language === 'fr'
-                ? 'Impossible de charger data.json.\n\n' +
-                  'Vérifiez que:\n' +
-                  '• Le fichier data.json existe\n' +
-                  '• Un serveur web local est lancé\n' +
-                  '• Vous accédez via http://localhost'
-                : 'Unable to load data.json.\n\n' +
-                  'Please check that:\n' +
-                  '• The data.json file exists\n' +
-                  '• A local web server is running\n' +
-                  '• You are accessing via http://localhost';
-        } else {
-            errorMessage += error.message;
-        }
+        const errorMessage = state.language === 'fr'
+            ? 'Erreur lors du rechargement des données:\n\n' + error.message
+            : 'Error reloading data:\n\n' + error.message;
         
         alert(errorMessage);
     }

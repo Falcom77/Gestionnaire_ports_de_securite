@@ -244,7 +244,13 @@ function init() {
                 console.log(`✅ Chargé: ${state.ports.length} ports, ${state.devices.length} périphériques`);
                 
                 // Sauvegarder dans localStorage pour les prochaines fois
-                saveToLocalStorage();
+                const data = {
+                    ports: state.ports,
+                    devices: state.devices,
+                    categories: state.categories
+                };
+                localStorage.setItem('pfSenseData', JSON.stringify(data));
+                state.hasUnsavedChanges = false; // Pas de modifications au chargement initial
                 console.log('💾 Données sauvegardées dans le navigateur');
             } else {
                 console.warn('⚠️ Aucune donnée initiale trouvée');

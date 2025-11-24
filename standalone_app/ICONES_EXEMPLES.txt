@@ -1,0 +1,68 @@
+EXEMPLES D'ICÔNES POUR VOS SERVICES
+====================================
+
+Vous pouvez maintenant ajouter une URL d'icône personnalisée pour chaque service.
+
+SOURCES D'ICÔNES GRATUITES:
+---------------------------
+
+1. SIMPLE ICONS (Logos de marques)
+   https://simpleicons.org/
+   Exemple SSH: https://cdn.simpleicons.org/openssh
+   Exemple Steam: https://cdn.simpleicons.org/steam
+   Exemple Docker: https://cdn.simpleicons.org/docker
+   Format: https://cdn.simpleicons.org/[nom-du-service]
+
+2. DEVICON (Technologies)
+   https://cdn.jsdelivr.net/gh/devicons/devicon/icons/
+   Exemple: https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg
+
+3. ICONS8
+   https://icons8.com/icons
+   Nombreuses icônes gratuites en PNG/SVG
+
+4. FLATICON
+   https://www.flaticon.com/
+   Icônes gratuites (avec attribution)
+
+COMMENT UTILISER:
+-----------------
+
+1. Lors de l'ajout ou modification d'un port
+2. Remplissez le champ "URL de l'icône"
+3. Collez l'URL directe vers l'image (PNG, JPG, SVG)
+4. Cliquez sur "Enregistrer"
+
+EXEMPLES D'URLs:
+----------------
+
+Steam:
+https://cdn.simpleicons.org/steam
+
+SSH:
+https://cdn.simpleicons.org/openssh
+
+Proxmox:
+https://www.proxmox.com/images/proxmox/Proxmox_symbol_standard_hex_400px.png
+
+Grafana:
+https://cdn.simpleicons.org/grafana
+
+MySQL:
+https://cdn.simpleicons.org/mysql
+
+Docker:
+https://cdn.simpleicons.org/docker
+
+Redis:
+https://cdn.simpleicons.org/redis
+
+PostgreSQL:
+https://cdn.simpleicons.org/postgresql
+
+NOTES:
+------
+- Si l'URL ne fonctionne pas, la première lettre du service s'affichera
+- Format supporté: PNG, JPG, SVG
+- L'icône est redimensionnée automatiquement à 40x40px
+- Laissez vide pour afficher la lettre par défaut

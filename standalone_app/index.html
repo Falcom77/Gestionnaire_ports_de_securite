@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire pfSense - Version Fonctionnelle Complète</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar overlay -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+    
+    <!-- Sidebar Menu -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="sidebar-title">Menu</h3>
+            <button class="btn-close" onclick="closeSidebar()" title="Fermer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="sidebar-content" id="sidebarContent">
+            <!-- Le contenu du menu sera généré par JavaScript -->
+        </div>
+    </aside>
+    
+    <!-- Header -->
+    <header id="header"></header>
+    
+    <!-- Tabs -->
+    <div id="tabs" class="tabs"></div>
+    
+    <!-- Main Content -->
+    <main id="main"></main>
+    
+    <!-- Footer -->
+    <footer id="footer">
+        <!-- Le footer sera généré par JavaScript -->
+    </footer>
+    
+    <!-- Modals Container -->
+    <div id="modals"></div>
+    
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

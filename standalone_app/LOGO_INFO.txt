@@ -1,0 +1,16 @@
+INFORMATION LOGO
+================
+
+Le fichier logo.png n'est pas encore présent.
+
+POUR AJOUTER VOTRE LOGO:
+1. Placez votre fichier logo.png dans le dossier standalone_app/
+2. Dimensions recommandées : 200x200px ou 400x400px
+3. Format supporté : PNG avec transparence
+4. Le logo sera automatiquement redimensionné à 80x80px
+
+LOGO TEMPORAIRE:
+Un logo SVG temporaire "CELLITECH" a été créé (logo.svg)
+Pour l'utiliser, renommez-le en logo.png ou créez votre propre logo.png
+
+Si aucun logo n'est présent, l'espace sera simplement vide (pas d'erreur).

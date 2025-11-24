@@ -1,0 +1,41 @@
+DISPOSITION DES BOUTONS DU HEADER
+==================================
+
+ONGLET "RÈGLES DE PORTS":
+-------------------------
+
+┌────────────────────────────────────────────┐
+│  Logo    Titre pfSense    [☀️][Ajouter Port][Catégorie]│
+│                           [  ][Export CSV  ][pfSense  ]│
+└────────────────────────────────────────────┘
+
+Colonne 1: Bouton Jour/Nuit (centré verticalement)
+Colonne 2: Ajouter Port (haut) + Export CSV (bas)
+Colonne 3: Catégorie (haut) + pfSense (bas)
+
+
+ONGLET "PARC INFORMATIQUE":
+----------------------------
+
+┌──────────────────────────────────────────────────┐
+│  Logo    Titre pfSense    [☀️][Ajouter Périphérique]│
+│                           [  ][Export CSV         ]│
+└──────────────────────────────────────────────────┘
+
+Colonne 1: Bouton Jour/Nuit (centré verticalement)
+Colonne 2: Ajouter Périphérique (haut) + Export CSV (bas)
+
+
+MODIFICATIONS CSS:
+------------------
+Utilisation de CSS Grid avec 3 colonnes:
+- grid-template-columns: auto auto auto
+- Alignement à droite: justify-content: flex-end
+- Gap entre boutons: 0.75rem
+
+Chaque bouton a une classe spécifique pour son positionnement:
+- btn-theme: Colonne 1, lignes 1-2 (span vertical)
+- btn-add-port: Colonne 2, ligne 1
+- btn-export-csv: Colonne 2, ligne 2
+- btn-category: Colonne 3, ligne 1
+- btn-pfsense: Colonne 3, ligne 2

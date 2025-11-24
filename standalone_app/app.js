@@ -684,10 +684,10 @@ function renderTabs() {
         <div class="container">
             <div class="tabs-container">
                 <button class="tab ${state.activeTab === 'ports' ? 'active' : ''}" onclick="switchTab('ports')">
-                    📋 Règles de Ports (${state.ports.length})
+                    📋 ${t('portRules')} (${state.ports.length})
                 </button>
                 <button class="tab ${state.activeTab === 'devices' ? 'active' : ''}" onclick="switchTab('devices')">
-                    💻 Parc Informatique (${state.devices.length})
+                    💻 ${t('devices')} (${state.devices.length})
                 </button>
             </div>
         </div>

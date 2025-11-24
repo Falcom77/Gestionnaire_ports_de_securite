@@ -391,7 +391,7 @@ function showPortModal(port = null) {
     const form = document.getElementById('portForm');
     
     if (port) {
-        document.getElementById('modalTitle').textContent = 'Modifier le Port';
+        document.getElementById('modalTitle').textContent = t('editPortModal');
         form.service.value = port.service || '';
         form.port_internal.value = port.port_internal || '';
         form.port_external.value = port.port_external || '';
@@ -402,7 +402,7 @@ function showPortModal(port = null) {
         form.ip_address.value = port.ip_address || '';
         form.icon_url.value = port.icon_url || '';
     } else {
-        document.getElementById('modalTitle').textContent = 'Ajouter un Port';
+        document.getElementById('modalTitle').textContent = t('addPortModal');
         form.reset();
     }
     
@@ -416,14 +416,14 @@ function showDeviceModal(device = null) {
     const form = document.getElementById('deviceForm');
     
     if (device) {
-        document.getElementById('deviceModalTitle').textContent = 'Modifier le Périphérique';
+        document.getElementById('deviceModalTitle').textContent = t('editDeviceModal');
         form.hostname.value = device.hostname || '';
         form.ip_address.value = device.ip_address || '';
         form.mac_address.value = device.mac_address || '';
         form.device_type.value = device.device_type || '';
         form.device_description.value = device.description || '';
     } else {
-        document.getElementById('deviceModalTitle').textContent = 'Ajouter un Périphérique';
+        document.getElementById('deviceModalTitle').textContent = t('addDeviceModal');
         form.reset();
     }
     

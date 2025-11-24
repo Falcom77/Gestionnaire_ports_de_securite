@@ -1,0 +1,133 @@
+═══════════════════════════════════════════════════════════
+  COMMENT MODIFIER VOS DONNÉES - Guide Complet
+═══════════════════════════════════════════════════════════
+
+📝 FICHIER À ÉDITER : data.js
+
+Ce fichier contient toutes vos règles de port et périphériques.
+
+
+🔧 MÉTHODE 1 : Via l'interface (Recommandé)
+═══════════════════════════════════════════════════════════
+
+1. Ouvrez index.html (double-clic)
+2. Utilisez le menu (☰) en haut à droite
+3. Cliquez sur "Ajouter Port" ou "Ajouter Périphérique"
+4. Remplissez le formulaire
+5. Cliquez "Enregistrer"
+
+✅ Les données sont automatiquement sauvegardées !
+✅ Fonctionne dans tous les navigateurs
+
+
+📄 MÉTHODE 2 : Éditer data.js manuellement
+═══════════════════════════════════════════════════════════
+
+1. Ouvrez data.js avec un éditeur de texte (Notepad++, VSCode, etc.)
+
+2. Le fichier a cette structure :
+
+   const initialData = {
+     "ports": [ ... liste de vos ports ... ],
+     "devices": [ ... liste de vos périphériques ... ],
+     "categories": [ ... liste de catégories ... ]
+   };
+
+3. Pour ajouter un nouveau port, copiez un port existant et modifiez :
+
+   {
+     "id": "nouveau-id-unique",
+     "service": "Mon Service",
+     "port_internal": "8080",
+     "port_external": "8080",
+     "protocol": "TCP",
+     "description": "Description de mon service",
+     "category": "Infrastructure",
+     "destination": "mon-serveur",
+     "ip_address": "192.168.1.100/24",
+     "icon_url": "",
+     "is_active": true
+   }
+
+4. Sauvegardez le fichier
+
+5. Dans l'application :
+   - Rechargez la page (F5)
+   OU
+   - Menu (☰) → DATA → "Recharger depuis data.js"
+
+
+⚠️ ATTENTION - Règles importantes :
+═══════════════════════════════════════════════════════════
+
+✅ Respectez la syntaxe JSON (guillemets, virgules, accolades)
+✅ Chaque élément sauf le dernier doit avoir une virgule à la fin
+✅ Les ID doivent être uniques
+✅ N'oubliez pas les guillemets autour des valeurs texte
+
+❌ NE PAS supprimer les virgules entre les éléments
+❌ NE PAS oublier les accolades { } et crochets [ ]
+❌ NE PAS utiliser des guillemets simples ' (utilisez ")
+
+
+🔄 SYNCHRONISER ENTRE NAVIGATEURS
+═══════════════════════════════════════════════════════════
+
+Chaque navigateur (Firefox, Edge, Chrome) a sa propre mémoire.
+
+Pour synchroniser :
+1. Modifiez data.js
+2. Dans CHAQUE navigateur :
+   - Rechargez la page (F5)
+   OU
+   - Menu → DATA → "Recharger depuis data.js"
+
+Tous les navigateurs auront alors les mêmes données !
+
+
+💾 SAUVEGARDER VOS MODIFICATIONS
+═══════════════════════════════════════════════════════════
+
+Vos modifications via l'interface sont dans le localStorage du navigateur.
+
+Pour les sauvegarder définitivement :
+1. Menu (☰) → EXPORTS
+2. "Export CSV Ports" ou "Export Parc Informatique"
+3. Vous obtenez un fichier CSV avec toutes vos données
+
+Note : Il n'y a pas encore d'import CSV automatique.
+Pour réintégrer dans data.js, vous devez le faire manuellement.
+
+
+🔙 RESTAURER LES DONNÉES INITIALES
+═══════════════════════════════════════════════════════════
+
+Si vous voulez revenir aux données d'origine de data.js :
+
+1. Menu (☰) → DATA → "Recharger depuis data.js"
+2. Confirmez
+
+⚠️ Attention : Toutes les modifications non exportées seront perdues !
+
+
+🆘 EN CAS DE PROBLÈME
+═══════════════════════════════════════════════════════════
+
+Tableau vide / Erreur JavaScript :
+→ Vérifiez la syntaxe de data.js
+→ Ouvrez la console du navigateur (F12)
+→ Regardez les erreurs affichées
+
+Application ne démarre pas :
+→ Vérifiez que data.js existe
+→ Vérifiez qu'il n'y a pas d'erreur de syntaxe
+→ Console (F12) : localStorage.clear() puis rechargez
+
+Modifications non visibles :
+→ Rechargez la page (F5)
+→ Ou utilisez le bouton "Recharger depuis data.js"
+
+
+═══════════════════════════════════════════════════════════
+  © 2025/2026 - Une création imaginée par Falcom
+═══════════════════════════════════════════════════════════

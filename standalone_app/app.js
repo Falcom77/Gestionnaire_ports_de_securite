@@ -707,7 +707,7 @@ function renderPorts() {
     });
     
     if (Object.keys(grouped).length === 0) {
-        return '<div class="container"><div class="empty-state"><h3>Aucune règle de port</h3><p>Cliquez sur "Ajouter Port" pour commencer</p></div></div>';
+        return `<div class="container"><div class="empty-state"><h3>${t('noRules')}</h3><p>${t('clickAddPort')}</p></div></div>`;
     }
     
     return Object.keys(grouped).sort().map(category => {

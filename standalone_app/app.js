@@ -790,7 +790,7 @@ function renderDevices() {
     const sortIcon = (key) => state.sortConfig.key === key ? (state.sortConfig.direction === 'asc' ? ' ↑' : ' ↓') : '';
     
     if (sortedDevices.length === 0) {
-        return '<div class="container"><div class="empty-state"><h3>Aucun périphérique</h3><p>Cliquez sur "Ajouter Périphérique" pour commencer</p></div></div>';
+        return `<div class="container"><div class="empty-state"><h3>${t('noDevices')}</h3><p>${t('clickAddDevice')}</p></div></div>`;
     }
     
     return `
@@ -799,12 +799,12 @@ function renderDevices() {
                 <table>
                     <thead>
                         <tr>
-                            <th style="width:200px" onclick="handleSort('hostname')">Hostname${sortIcon('hostname')}</th>
-                            <th style="width:180px" onclick="handleSort('ip_address')">IP/Masque${sortIcon('ip_address')}</th>
-                            <th style="width:160px" onclick="handleSort('mac_address')">MAC${sortIcon('mac_address')}</th>
-                            <th style="width:150px" onclick="handleSort('device_type')">Type${sortIcon('device_type')}</th>
-                            <th style="min-width:200px" onclick="handleSort('description')">Description${sortIcon('description')}</th>
-                            <th style="width:140px; text-align:center">Actions</th>
+                            <th style="width:200px" onclick="handleSort('hostname')">${t('hostname')}${sortIcon('hostname')}</th>
+                            <th style="width:180px" onclick="handleSort('ip_address')">${t('ipMask')}${sortIcon('ip_address')}</th>
+                            <th style="width:160px" onclick="handleSort('mac_address')">${t('mac')}${sortIcon('mac_address')}</th>
+                            <th style="width:150px" onclick="handleSort('device_type')">${t('type')}${sortIcon('device_type')}</th>
+                            <th style="min-width:200px" onclick="handleSort('description')">${t('description')}${sortIcon('description')}</th>
+                            <th style="width:140px; text-align:center">${t('actions_col')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -817,10 +817,10 @@ function renderDevices() {
                                 <td>${device.description || '-'}</td>
                                 <td>
                                     <div class="actions">
-                                        <button class="btn-action btn-edit" onclick='showDeviceModal(${JSON.stringify(device).replace(/'/g, "&apos;")})' title="Modifier">
+                                        <button class="btn-action btn-edit" onclick='showDeviceModal(${JSON.stringify(device).replace(/'/g, "&apos;")})' title="${t('edit')}">
                                             ${icons.edit}
                                         </button>
-                                        <button class="btn-action btn-delete" onclick="deleteDevice('${device.id}')" title="Supprimer">
+                                        <button class="btn-action btn-delete" onclick="deleteDevice('${device.id}')" title="${t('delete')}">
                                             ${icons.trash}
                                         </button>
                                     </div>

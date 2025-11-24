@@ -6,6 +6,7 @@ let state = {
     devices: [],
     categories: [],
     darkMode: true,
+    language: 'fr',
     activeTab: 'ports',
     sortConfig: { key: null, direction: 'asc' },
     editingPort: null,

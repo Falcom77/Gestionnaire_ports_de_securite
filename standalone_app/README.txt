@@ -51,7 +51,16 @@ FONCTIONNALITÉS:
 
 TOUS LES BOUTONS SONT FONCTIONNELS !
 
-Pour réinitialiser les données:
+RECHARGER LES DONNÉES DEPUIS data.json:
+-----------------------------------------
+Si vous modifiez data.json et que les changements ne s'affichent pas:
+1. Ouvrez l'application
+2. Menu (☰) → Section DATA
+3. Cliquez sur "Recharger depuis data.json"
+4. Confirmez le rechargement
+✅ Vos nouvelles données sont chargées !
+
+Pour réinitialiser complètement:
 - Ouvrez la console du navigateur (F12)
 - Tapez: localStorage.clear()
 - Rechargez la page

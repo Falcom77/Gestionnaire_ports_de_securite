@@ -292,6 +292,13 @@ function toggleTheme() {
     render();
 }
 
+// Toggle langue
+function toggleLanguage() {
+    state.language = state.language === 'fr' ? 'en' : 'fr';
+    localStorage.setItem('language', state.language);
+    render();
+}
+
 // Toggle sidebar
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');

@@ -34,7 +34,8 @@ STRUCTURE:
 - index.html : Page principale
 - style.css : Tous les styles
 - app.js : Toute la logique JavaScript
-- data.json : Données initiales (67 ports + 6 périphériques)
+- data.js : VOS DONNÉES (67 ports + 6 périphériques) ⭐ À ÉDITER ICI
+- data.json : [OBSOLÈTE - Gardé pour référence]
 - logo.png : Votre logo (à ajouter)
 - logo.svg : Logo temporaire CELLITECH
 

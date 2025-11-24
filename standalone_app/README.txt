@@ -1,34 +1,16 @@
-GESTIONNAIRE pfSense - VERSION FONCTIONNELLE COMPLÈTE V2.0
-===========================================================
+GESTIONNAIRE pfSense - VERSION STANDALONE COMPLÈTE V2.1
+========================================================
 
-⚠️ IMPORTANT - TABLEAU VIDE ?
-Si le tableau est vide, c'est normal ! Voir solution ci-dessous.
+🎉 APPLICATION 100% AUTONOME - AUCUN SERVEUR REQUIS !
 
-UTILISATION CORRECTE:
----------------------
-1. OBLIGATOIRE : Utilisez un serveur local (pas double-clic!)
-   
-   Terminal/Console:
-   cd /chemin/vers/standalone_app
-   python3 -m http.server 8000
-   
-   Puis ouvrez : http://localhost:8000/
+UTILISATION ULTRA-SIMPLE:
+--------------------------
+1. Double-cliquez sur index.html
+2. L'application s'ouvre avec toutes vos données !
+3. Tout fonctionne immédiatement ✅
 
-2. Toutes les fonctionnalités sont opérationnelles
-3. Les données sont sauvegardées dans le navigateur (localStorage)
-
-POURQUOI UN SERVEUR LOCAL ?
-----------------------------
-Le double-clic sur index.html ouvre en mode file://
-Le navigateur bloque alors le chargement de data.json (sécurité CORS)
-= Tableau vide
-
-Avec un serveur local (http://localhost):
-✅ data.json se charge correctement
-✅ 67 ports et 6 périphériques s'affichent
-✅ Toutes les fonctionnalités marchent
-
-Voir PROBLEME_TABLEAU_VIDE.txt pour plus de détails
+Les données sont automatiquement chargées depuis data.js
+et sauvegardées dans le navigateur (localStorage)
 
 STRUCTURE:
 - index.html : Page principale

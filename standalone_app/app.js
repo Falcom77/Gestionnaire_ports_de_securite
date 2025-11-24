@@ -284,6 +284,37 @@ function saveToLocalStorage() {
     localStorage.setItem('pfSenseData', JSON.stringify(data));
 }
 
+// Recharger depuis data.json
+async function reloadFromDataJson() {
+    if (!confirm(t('confirmReloadData'))) {
+        return;
+    }
+    
+    try {
+        console.log('📂 Rechargement depuis data.json...');
+        const response = await fetch('data.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        state.ports = data.ports || [];
+        state.devices = data.devices || [];
+        state.categories = data.categories || [];
+        
+        // Sauvegarder dans localStorage
+        saveToLocalStorage();
+        
+        console.log(`✅ Rechargé: ${state.ports.length} ports, ${state.devices.length} périphériques`);
+        alert(t('dataReloaded'));
+        
+        closeSidebar();
+        render();
+    } catch (error) {
+        console.error('❌ Erreur rechargement:', error);
+        alert(t('errorReloadData') + '\n\n' + error.message);
+    }
+}
+
 // Toggle thème
 function toggleTheme() {
     state.darkMode = !state.darkMode;

@@ -850,63 +850,63 @@ function renderModals() {
         <div id="portModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 id="modalTitle">Ajouter un Port</h2>
+                    <h2 id="modalTitle">${t('addPortModal')}</h2>
                     <button class="btn-close" onclick="closeModal('portModal')">${icons.x}</button>
                 </div>
                 <form id="portForm" onsubmit="submitPortForm(event)">
                     <div class="form-group">
-                        <label>Service/Application *</label>
+                        <label>${t('serviceApp')}</label>
                         <input type="text" name="service" required>
                     </div>
                     <div class="form-group">
-                        <label>Port Interne *</label>
+                        <label>${t('portInternal')}</label>
                         <input type="text" name="port_internal" required>
                     </div>
                     <div class="form-group">
-                        <label>Port Externe *</label>
+                        <label>${t('portExternal')}</label>
                         <input type="text" name="port_external" required>
                     </div>
                     <div class="form-group">
-                        <label>Protocole *</label>
+                        <label>${t('protocolLabel')}</label>
                         <select name="protocol" required>
-                            <option value="">Sélectionner...</option>
+                            <option value="">${t('select')}</option>
                             <option value="TCP">TCP</option>
                             <option value="UDP">UDP</option>
                             <option value="TCP/UDP">TCP/UDP</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
+                        <label>${t('descriptionLabel')}</label>
                         <textarea name="description" rows="2"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Catégorie *</label>
+                        <label>${t('categoryLabel')}</label>
                         <select name="category" required>
-                            <option value="">Sélectionner...</option>
+                            <option value="">${t('select')}</option>
                             ${categoryOptions}
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Destination (VM/PC)</label>
+                        <label>${t('destinationLabel')}</label>
                         <select name="destination" id="destination" onchange="onDestinationChange()">
-                            <option value="">Sélectionner...</option>
+                            <option value="">${t('select')}</option>
                             ${deviceOptions}
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Adresse IP</label>
+                        <label>${t('ipAddress')}</label>
                         <input type="text" name="ip_address" id="ip_address">
                     </div>
                     <div class="form-group">
-                        <label>URL de l'icône (optionnel)</label>
+                        <label>${t('iconUrl')}</label>
                         <input type="url" name="icon_url" id="icon_url" placeholder="https://exemple.com/icon.png">
                         <small style="color: #9ca3af; font-size: 0.75rem; margin-top: 0.25rem; display: block;">
-                            Lien direct vers une image (PNG, JPG, SVG). Si vide, affiche la première lettre.
+                            ${t('iconUrlHelp')}
                         </small>
                     </div>
                     <div class="modal-actions">
-                        <button type="button" class="btn-cancel" onclick="closeModal('portModal')">Annuler</button>
-                        <button type="submit" class="btn-submit">Enregistrer</button>
+                        <button type="button" class="btn-cancel" onclick="closeModal('portModal')">${t('cancel')}</button>
+                        <button type="submit" class="btn-submit">${t('save')}</button>
                     </div>
                 </form>
             </div>

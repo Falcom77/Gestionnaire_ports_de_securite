@@ -734,7 +734,7 @@ function renderSidebar() {
         
         <div class="sidebar-section">
             <div class="sidebar-section-title">DATA</div>
-            <button class="sidebar-btn sidebar-btn-blue" onclick="reloadFromDataJson()" style="background: linear-gradient(to right, #6366f1, #8b5cf6);">
+            <button class="sidebar-btn sidebar-btn-blue" onclick="reloadFromDataJs()" style="background: linear-gradient(to right, #6366f1, #8b5cf6);">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
                     <polyline points="23 4 23 10 17 10"></polyline>
                     <polyline points="1 20 1 14 7 14"></polyline>

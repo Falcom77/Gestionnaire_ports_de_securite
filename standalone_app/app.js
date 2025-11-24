@@ -514,7 +514,7 @@ function submitCategoryForm(e) {
 
 // SUPPRESSIONS
 function deletePort(id) {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce port ?')) {
+    if (confirm(t('confirmDeletePort'))) {
         state.ports = state.ports.filter(p => p.id !== id);
         saveToLocalStorage();
         render();
@@ -522,7 +522,7 @@ function deletePort(id) {
 }
 
 function deleteDevice(id) {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce périphérique ?')) {
+    if (confirm(t('confirmDeleteDevice'))) {
         state.devices = state.devices.filter(d => d.id !== id);
         saveToLocalStorage();
         render();
@@ -530,7 +530,7 @@ function deleteDevice(id) {
 }
 
 function deleteCategory(category) {
-    if (confirm(`Supprimer la catégorie "${category}" et toutes ses règles ?`)) {
+    if (confirm(t('confirmDeleteCategory').replace('{0}', category))) {
         state.ports = state.ports.filter(p => p.category !== category);
         state.categories = state.categories.filter(c => c !== category);
         saveToLocalStorage();
